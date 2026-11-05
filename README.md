@@ -17,6 +17,10 @@ Dibina berdasarkan [Timesy](https://akmahalili.github.io/timesy/) (sifir darab),
 - **Kunci emas** — ganjaran untuk setiap jawapan betul; tebus di **Almari Plusy** (kon trafik, topi keselamatan, cermin mata hitam, latar bendera lumba dan bandar malam).
 - Pelbagai pemain dalam satu peranti, mod gelap, boleh dipasang (PWA) dan dibuka tanpa internet selepas kali pertama.
 
+## Gaya pixel art (8-bit)
+
+Semua grafik dilukis semula dalam gaya pixel retro: Plusy, kunci emas, kereta lumba, kereta polis, kereta pencuri dan aksesori almari ialah sprite pixel; kotak bersudut tajam dengan bayang keras; bunyi chiptune. Tajuk guna fon *Press Start 2P*; nombor guna *Jersey 10* (nombor 2 dan 5 jelas untuk kanak-kanak); teks guna *Pixelify Sans*.
+
 ## Sesuai untuk umur 6–7 / Made for ages 6–7
 
 - Soalan bermula dengan jumlah **hingga 10**, kemudian naik ke **hingga 20** (fakta asas tambah prasekolah & Tahun 1).
