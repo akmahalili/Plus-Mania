@@ -6,7 +6,7 @@
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Plus Mania</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Plus Mania: apps tambah 1–12 dwibahasa (BM/EN) untuk murid sekolah rendah, bersama Plusy si pintu ajaib. Belajar, kuiz dan cabaran dengan sentuhan, isyarat tangan atau arahan suara.">
+<meta name="description" content="Plus Mania: apps tambah 1–12 dwibahasa (BM/EN) untuk murid sekolah rendah, bersama Plusy penjaga sekatan jalan. Belajar, kuiz dan cabaran dengan sentuhan, isyarat tangan atau arahan suara.">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#C2410C">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -729,6 +729,94 @@ body::after{display:none}
 :is(.hero,.map,.challenge,.bl-card,.feature,.mode-card,.opt) > .glare{position:absolute;inset:0;z-index:6;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .25s;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.34),transparent 58%)}
 .tilting > .glare{opacity:1}
 @media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none!important;transition:none!important} }
+
+/* ---------- Roadblock look: asphalt, hazard stripes, racing orange ---------- */
+:root{--bg:#F2F4F8;--card:#FFFFFF;--card-2:#EDF0F5;--line:#DAE0E9;--ink:#141B2D;--ink-soft:#55607A;--primary:#E8590C;--hl:#FFC300;--hl-ink:#2A2000;
+  --hero-a:#1B2233;--hero-b:#2C3956;--hero-c:#E8590C;--chal-a:#FF8A00;--chal-b:#E8590C;--bun-a:#FFF3CC;--bun-b:#FFC94D;
+  --hazard:repeating-linear-gradient(-45deg,#FFC300 0 14px,#1B2233 14px 28px);
+  --map-sea:#B9C2D0;--map-sea-2:#8F9AAE;--map-path:#555D6D;--map-path-edge:#30353F;--map-done:#E8590C}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--bg:#0D1119;--card:#161C28;--card-2:#1E2533;--line:#2C3546;--ink:#EEF2F8;--ink-soft:#9AA6BC;--primary:#FF7A1A;
+  --map-sea:#2B3342;--map-sea-2:#1F2633;--map-path:#3C4350;--map-path-edge:#191D25;--map-done:#FF7A1A} }
+:root[data-theme="dark"]{--bg:#0D1119;--card:#161C28;--card-2:#1E2533;--line:#2C3546;--ink:#EEF2F8;--ink-soft:#9AA6BC;--primary:#FF7A1A;
+  --map-sea:#2B3342;--map-sea-2:#1F2633;--map-path:#3C4350;--map-path-edge:#191D25;--map-done:#FF7A1A}
+.hero::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;background:var(--hazard);z-index:1}
+.hero{overflow:hidden}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:-40px;height:90px;pointer-events:none;
+  background:repeating-linear-gradient(90deg,rgba(255,255,255,.18) 0 46px,transparent 46px 92px) center 50%/100% 6px no-repeat}
+.title{transform:skewX(-7deg);transform-origin:0 100%}
+.sec{font-style:normal}
+.sec::before{background:#FFC300;box-shadow:16px 0 0 var(--primary),32px 0 0 #3B82F6}
+.map-path .p-dash{stroke:#FFD43B;stroke-width:3.5;stroke-dasharray:10 10;stroke-linecap:butt}
+.map-path .p-done{opacity:.85}
+.map{border-style:solid}
+.hero[data-bg="checker"],.bgsw[data-bg="checker"]{background:repeating-conic-gradient(#1B2233 0 25%,#323D57 0 50%) 0 0/56px 56px}
+.hero[data-bg="city"],.bgsw[data-bg="city"]{background:
+  linear-gradient(90deg,transparent 0 6%,#0B0F1E 6% 14%,transparent 14% 18%,#11172B 18% 27%,transparent 27% 33%,#0B0F1E 33% 40%,transparent 40% 58%,#11172B 58% 66%,transparent 66% 72%,#0B0F1E 72% 83%,transparent 83% 88%,#11172B 88% 96%,transparent 96%) bottom/100% 30% no-repeat,
+  radial-gradient(circle at 18% 22%,#FFFFFF 0 1.5px,transparent 2.5px) 0 0/90px 70px,
+  linear-gradient(180deg,#0B1026,#36206B 58%,#E8590C)}
+/* home: roadblock game card */
+.road-card{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 16px;align-items:center;text-align:left;width:100%;padding:22px 20px 18px;border:0;border-radius:24px;overflow:hidden;
+  color:#fff;background:linear-gradient(115deg,#1B2233,#2C3956 60%,#3A4A70);box-shadow:0 8px 0 #0E1320,0 18px 30px -18px var(--lift);transition:transform .1s;margin-bottom:14px}
+.road-card::before{content:"";position:absolute;left:0;right:0;top:0;height:10px;background:var(--hazard)}
+.road-card:active{transform:translateY(3px)}
+.road-card .rc-ic{grid-row:span 2;width:68px;height:68px;border-radius:20px;background:#E8590C;display:grid;place-items:center;box-shadow:0 4px 0 #9A3A07}
+.road-card .rc-ic svg{width:34px;height:56px;transform:rotate(90deg);animation:idle .5s ease-in-out infinite alternate}
+@keyframes idle{to{translate:1px 0}}
+.road-card strong{font:400 clamp(24px,5vw,30px)/1.05 var(--f-display);transform:skewX(-7deg);transform-origin:0 100%}
+.road-card .new{display:inline-block;margin-left:8px;font:700 12px/1 var(--f-body);letter-spacing:.08em;background:#FFC300;color:#2A2000;border-radius:999px;padding:4px 8px;vertical-align:middle;transform:skewX(7deg)}
+.road-card .d{font-size:15px;opacity:.92}
+.road-card .rec{grid-row:span 2;text-align:center;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.12);border-radius:16px;padding:8px 12px}
+.road-card .rec b{display:block;font:400 32px/1 var(--f-display);letter-spacing:0;color:#FFC300}
+.road-card{grid-template-areas:"ic t rec" "ic d rec"}
+.road-card .rc-ic{grid-area:ic}.road-card strong{grid-area:t;min-width:0}.road-card .d{grid-area:d}.road-card .rec{grid-area:rec}
+@media (max-width:560px){ .road-card{grid-template-columns:auto minmax(0,1fr);grid-template-areas:"ic t" "d d" "rec rec"} .road-card .rec{display:flex;gap:8px;align-items:center;justify-content:center} .road-card .rec b{font-size:22px} .road-card .rc-ic{width:56px;height:56px} }
+/* ---------- Roadblock Rush ---------- */
+.road{position:relative;height:clamp(460px,68vh,660px);border-radius:28px;overflow:hidden;border:2px solid var(--line);
+  background:repeating-linear-gradient(0deg,#5DAA45 0 40px,#549E3E 40px 80px);background-position:0 var(--off,0);box-shadow:0 10px 24px -18px var(--lift);touch-action:manipulation;user-select:none}
+.rd-track{position:absolute;top:0;bottom:0;left:50%;width:min(560px,82%);translate:-50% 0;background:#3D434F;
+  box-shadow:-14px 0 0 -2px #E8E8E8,14px 0 0 -2px #E8E8E8}
+.rd-track::before,.rd-track::after{content:"";position:absolute;top:0;bottom:0;width:12px;background:repeating-linear-gradient(180deg,#E5364F 0 22px,#FFFFFF 22px 44px);background-position:0 var(--off,0)}
+.rd-track::before{left:-12px}.rd-track::after{right:-12px}
+.rd-lines{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,255,255,.85) 0 34px,transparent 34px 70px) calc(33.333% - 3px) var(--off,0)/6px 70px repeat-y,
+  linear-gradient(180deg,rgba(255,255,255,.85) 0 34px,transparent 34px 70px) calc(66.666% + 3px) var(--off,0)/6px 70px repeat-y}
+.rd-lanes{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);z-index:3}
+.rd-lane{position:relative;border:0;background:transparent;padding:0;margin:0;border-radius:0}
+.rd-lane:hover{background:rgba(255,255,255,.04)}
+.rd-lane.holding{outline-offset:-6px}
+.rd-lane .fbadge{top:auto;bottom:10px;right:50%;translate:50% 0}
+.rd-block{position:absolute;left:0;right:0;top:0;height:var(--gh,120px);display:grid;grid-template-columns:repeat(3,1fr);z-index:2;will-change:transform;pointer-events:none}
+.rd-block::before{content:"";position:absolute;left:-14px;right:-14px;top:calc(var(--gh,120px) * .26);height:16px;background:var(--hazard);border-radius:4px;box-shadow:0 4px 0 rgba(0,0,0,.25)}
+.rd-gate{position:relative;justify-self:center;width:72%;height:100%;perspective:600px}
+.rd-door{position:absolute;inset:0;border-radius:46% 46% 8px 8px / 34% 34% 8px 8px;border:7px solid #A9AFB8;
+  background:repeating-linear-gradient(90deg,#C26A1E 0 13px,#A9561A 13px 15px);box-shadow:inset 0 -10px 0 rgba(0,0,0,.18),0 8px 0 rgba(0,0,0,.25);transform-origin:0 50%;transition:transform .55s cubic-bezier(.3,.7,.3,1),filter .3s}
+.rd-door::before{content:"";position:absolute;left:-7px;right:-7px;top:52%;height:12px;background:#6B7280;box-shadow:inset 0 0 0 2px rgba(0,0,0,.15)}
+.rd-lock{position:absolute;left:50%;top:44%;translate:-50% 0;min-width:62%;padding:4px 8px 6px;border-radius:12px;background:#FFC21A;border:3px solid #A86A00;color:#3A2600;text-align:center;font:400 clamp(26px,6vw,40px)/1 var(--f-display);box-shadow:0 4px 0 #A86A00;transition:translate .4s,opacity .4s}
+.rd-lock::before{content:"";position:absolute;left:50%;top:-22px;width:40%;height:24px;translate:-50% 0;border:6px solid #A86A00;border-bottom:0;border-radius:30px 30px 0 0;transition:translate .3s}
+.rd-gate.open .rd-lock::before{translate:-50% -10px}
+.rd-gate.open .rd-door{transform:rotateY(-78deg);filter:brightness(.8)}
+.rd-gate.open .rd-lock{translate:-50% -30px;opacity:0;transition-delay:.15s}
+.rd-gate.hit .rd-door{animation:shake .45s;filter:drop-shadow(0 0 12px #FF3B3B)}
+.rd-car{position:absolute;bottom:22px;left:0;width:var(--cw,70px);z-index:4;pointer-events:none;transition:transform .22s cubic-bezier(.3,.7,.35,1);will-change:transform}
+.rd-car svg{display:block;width:100%;height:auto;filter:drop-shadow(0 10px 6px rgba(0,0,0,.35))}
+.rd-car.boost svg{animation:rumble .08s linear infinite}
+.rd-car.boost::after{content:"";position:absolute;left:22%;right:22%;top:100%;height:46px;background:linear-gradient(#FFD43B,#FF6A00 50%,transparent);border-radius:0 0 50% 50%;filter:blur(2px);opacity:.9}
+.rd-car.crash svg{animation:crash .6s ease}
+@keyframes rumble{50%{transform:translateX(1px)}}
+@keyframes crash{0%{transform:none}20%{transform:translateY(18px) rotate(-14deg)}45%{transform:translateY(8px) rotate(10deg)}70%{transform:translateY(12px) rotate(-5deg)}100%{transform:none}}
+.rd-q{position:absolute;z-index:5;top:12px;left:50%;translate:-50% 0;display:flex;gap:.18em;align-items:baseline;white-space:nowrap;padding:8px 20px 10px;border-radius:14px;
+  background:#0E7A3E;color:#fff;border:4px solid #fff;box-shadow:0 0 0 3px #0E7A3E,0 12px 22px -12px rgba(0,0,0,.6);font:400 clamp(32px,7.5vw,54px)/1 var(--f-display)}
+.rd-q .x{opacity:.85;font-size:.78em}
+.rd-q .slot{min-width:1.1em;text-align:center}
+.rd-q .slot.ok{color:#FFD43B}
+.rd-msg{top:calc(34px + clamp(32px,7.5vw,54px) + 14px);z-index:5}
+.road .bl-me{z-index:6;width:64px}
+.rd-go{position:absolute;inset:0;z-index:7;display:grid;place-items:center;pointer-events:none;font:400 clamp(60px,16vw,120px)/1 var(--f-display);color:#FFC300;text-shadow:0 6px 0 #1B2233,0 0 30px rgba(0,0,0,.4)}
+.rd-go:empty{display:none}
+.rd-go span{animation:goPop .7s ease both}
+@keyframes goPop{0%{transform:scale(.3);opacity:0}40%{transform:scale(1.15);opacity:1}100%{transform:scale(1);opacity:0}}
+.rd-speed{gap:4px}
+@media (max-width:520px){ .rd-track{width:90%} .rd-lock{font-size:28px} }
 </style>
 </head>
 <body>
@@ -770,12 +858,12 @@ body::after{display:none}
         <div class="mascot" id="homeMascot"></div>
         <div class="hero-t">
           <h1 class="title">Plus Mania<span class="tx" aria-hidden="true">+</span></h1>
-          <p class="sub" data-i18n="sub">Tambah 1 hingga 12 · Dwibahasa</p>
+          <p class="sub" data-i18n="sub">Tambah 1 hingga 12 · Misi Sekatan Jalan</p>
         </div>
         <p class="bubble" id="homeBubble"></p>
         <div class="stats">
           <div class="stat"><span class="si y" id="icStar"></span><div><b id="stStars">0<small>/36</small></b><span data-i18n="stats.stars">Bintang</span></div></div>
-          <div class="stat"><span class="si g" id="icMedal"></span><div><b id="stMastered">0<small>/12</small></b><span data-i18n="stats.mastered">Pintu dibuka</span></div></div>
+          <div class="stat"><span class="si g" id="icMedal"></span><div><b id="stMastered">0<small>/12</small></b><span data-i18n="stats.mastered">Sekatan dibuka</span></div></div>
           <button class="stat" id="stCarrotBtn"><span class="si c" id="icCarrot"></span><div><b id="stCarrots">0</b><span data-i18n="stats.carrots">Kunci emas</span></div></button>
           <div class="stat"><span class="si o" id="icTrophy"></span><div><b id="stBest">0</b><span data-i18n="stats.best">Rekod cabaran</span></div></div>
         </div>
@@ -796,7 +884,7 @@ body::after{display:none}
 
       <div class="hint" data-hint="home"></div>
 
-      <h2 class="sec" data-i18n="pick">Pulau Tambah</h2>
+      <h2 class="sec" data-i18n="pick">Lebuhraya Tambah</h2>
       <p class="map-note" data-i18n="mapNote"></p>
       <div class="map" id="map">
         <svg class="map-path" id="mapPath" aria-hidden="true"></svg>
@@ -805,6 +893,12 @@ body::after{display:none}
       </div>
 
       <h2 class="sec" data-i18n="gamesTitle">Permainan</h2>
+      <button class="road-card" id="btnRoad">
+        <span class="rc-ic" id="rcIcon"></span>
+        <strong><span data-i18n="rd.title">Sekatan Jalan</span><span class="new" data-i18n="rd.tag">BAHARU</span></strong>
+        <span class="rec"><span data-i18n="rec">Rekod</span><b id="rdBest">0</b></span>
+        <span class="d" data-i18n="rd.desc"></span>
+      </button>
       <div class="duo games">
       <button class="challenge" id="btnChallenge" data-finger="fist">
         <span class="fist-tag"><span class="i-fist"></span><span data-i18n="fist">Genggam</span></span>
@@ -902,6 +996,43 @@ body::after{display:none}
         <p class="bl-msg" id="blMsg" aria-live="polite"></p>
         <div class="bl-field" id="blField"></div>
         <div class="bl-me"><div class="mascot head" id="blMascot"></div></div>
+      </div>
+    </section>
+
+    <!-- ROADBLOCK RUSH -->
+    <section class="screen" id="scrRoad" hidden>
+      <div class="topline">
+        <button class="btn ghost" id="rdBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span class="lbl" data-i18n="exit">Keluar</span></button>
+        <h2 data-i18n="rd.title">Sekatan Jalan</h2>
+        <span class="grow"></span>
+        <div class="qmeta">
+          <span class="chip lives" id="rdLives"></span>
+          <span class="chip"><span data-i18n="rd.score">Sekatan</span> <b id="rdScore">0</b></span>
+          <span class="chip rd-speed"><b id="rdSpeed">40</b><span>km/j</span></span>
+          <span class="chip streak" id="rdStreak" hidden><span class="flame"></span><b id="rdStreakN">0</b><span data-i18n="inARow">berturut-turut</span></span>
+          <span class="chip carrot" id="rdCarrots"><span class="ci"></span><b id="rdCarrotsN">0</b></span>
+        </div>
+      </div>
+      <div class="hint" data-hint="road"></div>
+      <div class="road" id="road">
+        <div class="rd-track" id="rdTrack">
+          <div class="rd-lines"></div>
+          <div class="rd-block" id="rdBlock">
+            <div class="rd-gate"><div class="rd-door"><span class="rd-lock">?</span></div></div>
+            <div class="rd-gate"><div class="rd-door"><span class="rd-lock">?</span></div></div>
+            <div class="rd-gate"><div class="rd-door"><span class="rd-lock">?</span></div></div>
+          </div>
+          <div class="rd-car" id="rdCar"></div>
+          <div class="rd-lanes">
+            <button class="rd-lane" data-finger="1" data-lane="0"><span class="fbadge"></span></button>
+            <button class="rd-lane" data-finger="2" data-lane="1"><span class="fbadge"></span></button>
+            <button class="rd-lane" data-finger="3" data-lane="2"><span class="fbadge"></span></button>
+          </div>
+        </div>
+        <div class="rd-q" aria-live="polite"><span id="rdA">?</span><span class="x">+</span><span id="rdB">?</span><span class="x">=</span><span class="slot" id="rdSlot">?</span></div>
+        <p class="bl-msg rd-msg" id="rdMsg" aria-live="polite"></p>
+        <div class="bl-me"><div class="mascot head" id="rdMascot"></div></div>
+        <div class="rd-go" id="rdGo" aria-hidden="true"></div>
       </div>
     </section>
 
@@ -1023,13 +1154,13 @@ const save = () => { try { localStorage.setItem(KEY, JSON.stringify(store)); } c
 if (store.theme === 'light' || store.theme === 'dark') document.documentElement.dataset.theme = store.theme;
 /* Players: each child on a shared device keeps their own stars, carrots, closet and question history. */
 function newProfile(name, color) {
-  return { id: 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), name: name || '', color: color || 9, stars: {}, best: 0, facts: {}, carrots: 0, owned: [], wear: { hat: '', face: '', bg: '' }, balloonBest: 0, mapPos: 0 };
+  return { id: 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), name: name || '', color: color || 9, stars: {}, best: 0, facts: {}, carrots: 0, owned: [], wear: { hat: '', face: '', bg: '' }, balloonBest: 0, roadBest: 0, mapPos: 0 };
 }
 if (!Array.isArray(store.profiles) || !store.profiles.length) {
   const first = newProfile('', 9); first.stars = store.stars || {}; first.best = store.best || 0;
   store.profiles = [first]; store.current = first.id;
 }
-store.profiles.forEach(p => { p.stars = p.stars || {}; p.facts = p.facts || {}; p.owned = p.owned || []; p.carrots = p.carrots || 0; p.best = p.best || 0; p.balloonBest = p.balloonBest || 0; p.mapPos = p.mapPos || 0; p.wear = Object.assign({ hat: '', face: '', bg: '' }, p.wear); });
+store.profiles.forEach(p => { p.stars = p.stars || {}; p.facts = p.facts || {}; p.owned = p.owned || []; p.carrots = p.carrots || 0; p.best = p.best || 0; p.balloonBest = p.balloonBest || 0; p.roadBest = p.roadBest || 0; p.mapPos = p.mapPos || 0; p.wear = Object.assign({ hat: '', face: '', bg: '' }, p.wear); });
 delete store.stars; delete store.best;
 const P = () => store.profiles.find(p => p.id === store.current) || store.profiles[0];
 const initial = p => { const n = (p.name || '').trim(); return n ? [...n][0].toUpperCase() : String(store.profiles.indexOf(p) + 1); };
@@ -1120,17 +1251,18 @@ function parseNumber(text) {
 /* ================= words in both languages ================= */
 const I18N = {
   ms: {
-    sub: 'Tambah 1 hingga 12 · Dwibahasa',
-    modeTitle: 'Cara main', pick: 'Pulau Tambah', mapNote: 'Dapatkan 3 bintang untuk membuka satu pintu. Plusy akan melompat ke pintu seterusnya!', gamesTitle: 'Permainan', tileK: 'Tambah', tableWord: 'Tambah',
+    sub: 'Tambah 1 hingga 12 · Misi Sekatan Jalan',
+    rd: { title: 'Sekatan Jalan', tag: 'BAHARU', desc: 'Pandu kereta ke lorong yang ada jawapan betul. Kunci terbuka, sekatan dibuka, vroom!', score: 'Sekatan', start: 'Sedia… mula… PECUT!', go: 'PECUT!', wrong: (k, n, a) => `Bum! ${k} + ${n} = ${a}`, titleNew: 'Rekod baharu!', good: 'Pemandu hebat!', ok: 'Bagus!', unit: 'sekatan', msg: s => `Kamu buka ${s} sekatan jalan.`, best: b => ` Rekod terbaik kamu: ${b}.`, noLane: v => `Tiada lorong ${v}. Cuba lagi!` },
+    modeTitle: 'Cara main', pick: 'Lebuhraya Tambah', mapNote: 'Setiap tahap ada sekatan jalan. Dapatkan 3 bintang untuk membukanya, dan Plusy akan bergerak ke tahap seterusnya!', gamesTitle: 'Permainan', tileK: 'Tambah', tableWord: 'Tambah',
     seg: { touch: 'Sentuh', gesture: 'Tangan', voice: 'Suara' },
     modes: { touch: ['Sentuh', 'Sentuh jawapan pada skrin.'], gesture: ['Isyarat Tangan', 'Tunjuk jari ke kamera, tahan sekejap untuk pilih.'], voice: ['Arahan Suara', 'Sebut jawapan dengan kuat, contoh “lima belas”.'] },
-    stats: { stars: 'Bintang', mastered: 'Pintu dibuka', best: 'Rekod cabaran', carrots: 'Kunci emas' },
+    stats: { stars: 'Bintang', mastered: 'Sekatan dibuka', best: 'Rekod cabaran', carrots: 'Kunci emas' },
     who: { title: 'Siapa bermain?', add: 'Tambah pemain', addTitle: 'Pemain baharu', editTitle: 'Ubah pemain', edit: 'Ubah', nameLbl: 'Nama', namePh: 'Contoh: Aisyah', colorLbl: 'Warna', save: 'Simpan', cancel: 'Batal', del: 'Padam pemain', delConfirm: n => `Padam ${n}? Semua bintang dan kunci emas ${n} akan hilang.`, delYes: 'Ya, padam', player: i => `Pemain ${i}`, hello: n => `Hai ${n}! Jom main.`, reset: 'Padam semua pemain di peranti ini', resetNote: 'Nama dan markah disimpan dalam peranti ini sahaja. Orang lain yang buka pautan Plus Mania di peranti mereka tidak nampak data ini.', resetMsg: 'Semua nama, bintang, lobak merah dan barang almari di peranti ini akan dipadam. Plusy akan bermula semula seperti baharu.', resetYes: 'Ya, padam semua', resetDone: 'Semua pemain sudah dipadam. Plusy bermula semula.' },
     rv: { title: 'Ulang Kaji Pintar', btn: 'Ulang kaji pintar', weak: n => `${n} soalan perlu latihan`, none: 'Tiada soalan sukar. Hebat!', empty: 'Main kuiz dahulu. Plusy akan ingat soalan yang sukar.', titles: ['Teruskan berlatih!', 'Bagus!', 'Hebat!', 'Cemerlang!'], resMsg: (s, left) => `Kamu jawab ${s} daripada 12 betul. ` + (left ? `Masih ada ${left} soalan untuk dilatih.` : 'Semua soalan sukar sudah dikuasai!') },
     carrotsEarned: n => `Kamu dapat ${n} kunci emas!`,
-    map: { next: n => `Yay! Pintu terbuka! Jom ke Tambah ${n}!`, allDone: 'Hebat! Semua 12 pintu sudah terbuka. Kamu juara tambah!' },
+    map: { next: n => `Vroom! Sekatan terbuka! Jom ke Tambah ${n}!`, allDone: 'Hebat! Semua 12 sekatan sudah dibuka. Kamu juara lebuhraya!' },
     combo: ['HEBAT!', 'SUPER!', 'LUAR BIASA!', 'JUARA!'], streakSmall: n => `${n} betul berturut-turut`,
-    poke: ['Hehe, geli!', 'Jom tambah sama-sama!', 'Saya suka kunci emas!', 'Kamu pandai!', 'Tok, tok! Siapa di sana?'],
+    poke: ['Berhenti! Jawab dulu soalan saya!', 'Vroom, vroom!', 'Saya suka kunci emas!', 'Kamu pemandu hebat!', 'Sekatan dibuka!'],
     bl: { title: 'Pop Belon', desc: 'Pecahkan belon jawapan yang betul sebelum ia terbang!', score: 'Skor', lives: 'Nyawa', unit: 'belon', start: 'Belon datang!', wrong: (k, n, a) => `Alamak! ${k} + ${n} = ${a}`, miss: (k, n, a) => `Terlepas! ${k} + ${n} = ${a}`, noBalloon: v => `Tiada belon ${v}. Cuba lagi!`, titleNew: 'Rekod baharu!', good: 'Hebat!', ok: 'Bagus!', msg: s => `Kamu pecahkan ${s} belon yang betul.`, best: b => ` Rekod terbaik kamu: ${b}.` },
     closet: { title: 'Almari Plusy', sub: 'Jawab soalan dengan betul untuk kumpul kunci emas. Tekan barang untuk beli, pakai atau tanggalkan.', hats: 'Topi & hiasan kepala', face: 'Muka', bg: 'Latar', wear: 'Pakai', worn: 'Dipakai', need: n => `Perlu ${n} lagi`, bought: n => `${n} sudah dibeli!`, short: n => `Kumpul ${n} kunci emas lagi untuk beli barang ini.`, info: (c, o) => `${c} kunci emas · ${o} barang` },
     chalTitle: 'Cabaran 60 saat', chalDesc: 'Soalan tambah campur, 1 hingga 12. Jawab seberapa banyak yang boleh!', rec: 'Rekod', fist: 'Genggam',
@@ -1144,20 +1276,21 @@ const I18N = {
     streakMsg: (p, s) => `${p} ${s} betul berturut-turut!`,
     almost: (k, n, a) => `Hampir! ${k} + ${n} = ${a}`, youSaid: v => ` (kamu sebut ${v})`, noNum: 'Plusy tak dengar nombor. Cuba sebut sekali lagi.',
     resTitles: ['Jom cuba lagi!', 'Bagus!', 'Hebat!', 'Cemerlang!'],
-    res3: n => `Semua betul! Pintu Tambah ${n} terbuka!`,
+    res3: n => `Semua betul! Sekatan Tambah ${n} dibuka!`,
     res0: (s, n) => `Kamu jawab ${s} daripada 12 betul. Ulang kaji Tambah ${n} dahulu, kemudian cuba lagi.`,
     resMid: s => `Kamu jawab ${s} daripada 12 betul. Cuba lagi untuk kumpul lebih banyak bintang.`,
     chNew: 'Rekod baharu!', chGood: 'Hebat!', chOk: 'Bagus!',
     chMsg: s => `Kamu jawab ${s} soalan betul dalam 60 saat.`, chBest: b => ` Rekod terbaik kamu: ${b}.`, correctUnit: 'betul',
     again: 'Main lagi', learnNext: n => `Belajar Tambah ${n}`, review: n => `Ulang kaji Tambah ${n}`, menu: 'Menu utama', notX: v => `(bukan ${v})`,
     hints: {
-      home: { touch: 'Sentuh satu tahap di peta untuk mula belajar.', gesture: 'Tunjuk <b>1–10 jari</b> dan tahan untuk pilih pintu. <b>11</b> = 1 jari setiap tangan. <b>12</b> = 1 jari (kiri) + 2 jari (kanan). <b>Genggam tangan</b> untuk Cabaran.', voice: 'Sebut <b>“tambah lima”</b> untuk belajar, <b>“kuiz lima”</b> untuk kuiz, <b>“cabaran”</b> atau <b>“belon”</b>.' },
+      home: { touch: 'Sentuh satu tahap di peta untuk mula belajar.', gesture: 'Tunjuk <b>1–10 jari</b> dan tahan untuk pilih tahap. <b>11</b> = 1 jari setiap tangan. <b>12</b> = 1 jari (kiri) + 2 jari (kanan). <b>Genggam tangan</b> untuk Cabaran.', voice: 'Sebut <b>“tambah lima”</b> untuk belajar, <b>“kuiz lima”</b> untuk kuiz, <b>“sekatan”</b>, <b>“cabaran”</b> atau <b>“belon”</b>.' },
       learn: { touch: 'Sentuh satu baris dan lihat kunci jatuh ke dalam peti, kemudian kira semuanya.', gesture: 'Tunjuk jari untuk pilih baris (4 jari = baris 4). Baris <b>11</b> = 1 + 1 jari, baris <b>12</b> = 1 + 2 jari (dua tangan). <b>Genggam tangan</b> untuk mula kuiz.', voice: 'Sebut nombor, contoh <b>“empat”</b>. Sebut <b>“baca”</b> untuk dengar semua, <b>“kuiz”</b> untuk mula kuiz.' },
       quiz: { touch: 'Sentuh jawapan yang betul.', gesture: 'Tunjuk <b>1, 2, 3 atau 4 jari</b> dan tahan untuk pilih jawapan.', voice: 'Terus sebut jawapan sebaik soalan keluar, contoh <b>“tiga belas”</b>. Sebut <b>“ulang”</b> untuk dengar soalan.' },
       result: { touch: 'Pilih apa yang kamu mahu buat seterusnya.', gesture: 'Tunjuk jari ikut nombor pada butang.', voice: 'Sebut <b>“main lagi”</b>, <b>“seterusnya”</b> atau <b>“menu”</b>.' },
+      road: { touch: 'Sentuh lorong yang ada jawapan betul, kereta akan pecut ke sana! (Di komputer: kekunci ← → dan ↑ untuk pecut.)', gesture: 'Tunjuk <b>1, 2 atau 3 jari</b> untuk pilih lorong, dan tahan sekejap.', voice: 'Sebut jawapan dengan kuat, contoh <b>“lima belas”</b>. Kereta akan tukar lorong.' },
       balloon: { touch: 'Sentuh belon yang ada jawapan betul sebelum ia terbang!', gesture: 'Tunjuk <b>1–4 jari</b> ikut nombor pada belon, dan tahan sekejap.', voice: 'Sebut jawapan dengan kuat, contoh <b>“lima belas”</b>.' }
     },
-    bubble: { touch: 'Hai, saya Plusy si pintu ajaib! Jom belajar tambah sambil bermain.', gesture: 'Hai, saya Plusy! Angkat jari ke kamera, nanti saya kira.', voice: 'Hai, saya Plusy! Cakap dengan kuat, saya sedang mendengar.' },
+    bubble: { touch: 'Hai, saya Plusy, penjaga sekatan jalan! Jawab soalan tambah untuk buka jalan.', gesture: 'Hai, saya Plusy! Angkat jari ke kamera, nanti saya kira.', voice: 'Hai, saya Plusy! Cakap dengan kuat, saya sedang mendengar.' },
     camera: 'Kamera', microphone: 'Mikrofon', fingers: 'jari',
     showHand: 'Tunjuk tangan ke kamera.', hold: 'Tahan sekejap…', lower: 'Bagus! Turunkan tangan dahulu.', seen: v => `${v} jari dikesan.`, fistSeen: 'Genggam tangan dikesan.',
     cam: {
@@ -1210,17 +1343,18 @@ const I18N = {
     sr: 'ms-MY'
   },
   en: {
-    sub: 'Adding 1 to 12 · Bilingual',
-    modeTitle: 'How to play', pick: 'Plus Island', mapNote: 'Get 3 stars to unlock a door. Plusy hops to the next door!', gamesTitle: 'Games', tileK: 'Plus', tableWord: 'Plus',
+    sub: 'Adding 1 to 12 · Roadblock Mission',
+    rd: { title: 'Roadblock Rush', tag: 'NEW', desc: 'Steer your car into the lane with the right answer. Unlock the gate and vroom through!', score: 'Gates', start: 'Ready… set… GO!', go: 'GO!', wrong: (k, n, a) => `Crash! ${k} + ${n} = ${a}`, titleNew: 'New record!', good: 'Ace driver!', ok: 'Good job!', unit: 'gates', msg: s => `You opened ${s} roadblock${s === 1 ? '' : 's'}.`, best: b => ` Your best: ${b}.`, noLane: v => `No lane says ${v}. Try again!` },
+    modeTitle: 'How to play', pick: 'Plus Highway', mapNote: 'Every level has a roadblock. Get 3 stars to open it, and Plusy rolls on to the next level!', gamesTitle: 'Games', tileK: 'Plus', tableWord: 'Plus',
     seg: { touch: 'Touch', gesture: 'Hands', voice: 'Voice' },
     modes: { touch: ['Touch', 'Tap the answer on the screen.'], gesture: ['Hand Gestures', 'Show your fingers to the camera and hold to choose.'], voice: ['Voice Commands', 'Say the answer out loud, like “fifteen”.'] },
-    stats: { stars: 'Stars', mastered: 'Doors unlocked', best: 'Challenge best', carrots: 'Gold keys' },
+    stats: { stars: 'Stars', mastered: 'Roadblocks open', best: 'Challenge best', carrots: 'Gold keys' },
     who: { title: 'Who’s playing?', add: 'Add player', addTitle: 'New player', editTitle: 'Edit player', edit: 'Edit', nameLbl: 'Name', namePh: 'For example: Aisyah', colorLbl: 'Colour', save: 'Save', cancel: 'Cancel', del: 'Delete player', delConfirm: n => `Delete ${n}? All of ${n}’s stars and gold keys will be lost.`, delYes: 'Yes, delete', player: i => `Player ${i}`, hello: n => `Hi ${n}! Let’s play.`, reset: 'Delete all players on this device', resetNote: 'Names and scores are saved on this device only. People who open the Plus Mania link on their own device cannot see them.', resetMsg: 'All names, stars, carrots and closet items on this device will be deleted. Plusy will start fresh.', resetYes: 'Yes, delete all', resetDone: 'All players were deleted. Plusy has started fresh.' },
     rv: { title: 'Smart Review', btn: 'Smart review', weak: n => `${n} question${n === 1 ? '' : 's'} to practise`, none: 'No tricky questions. Great job!', empty: 'Play a quiz first. Plusy will remember the tricky questions.', titles: ['Keep practising!', 'Good job!', 'Great!', 'Excellent!'], resMsg: (s, left) => `You got ${s} out of 12. ` + (left ? `${left} question${left === 1 ? '' : 's'} still to practise.` : 'You have mastered all the tricky questions!') },
     carrotsEarned: n => `You earned ${n} gold key${n === 1 ? '' : 's'}!`,
-    map: { next: n => `Yay! The door is open! On to Plus ${n}!`, allDone: 'Amazing! All 12 doors are unlocked. You’re an adding champion!' },
+    map: { next: n => `Vroom! Roadblock open! On to Plus ${n}!`, allDone: 'Amazing! All 12 roadblocks are open. You’re the highway champion!' },
     combo: ['GREAT!', 'SUPER!', 'AMAZING!', 'CHAMPION!'], streakSmall: n => `${n} in a row`,
-    poke: ['Hehe, that tickles!', 'Let’s add together!', 'I love golden keys!', 'You’re so clever!', 'Knock, knock! Who’s there?'],
+    poke: ['Stop! Answer my question first!', 'Vroom, vroom!', 'I love golden keys!', 'You’re an ace driver!', 'Roadblock open!'],
     bl: { title: 'Balloon Pop', desc: 'Pop the balloon with the right answer before it floats away!', score: 'Score', lives: 'Lives', unit: 'balloons', start: 'Here come the balloons!', wrong: (k, n, a) => `Oops! ${k} + ${n} = ${a}`, miss: (k, n, a) => `It got away! ${k} + ${n} = ${a}`, noBalloon: v => `No balloon says ${v}. Try again!`, titleNew: 'New record!', good: 'Great!', ok: 'Good job!', msg: s => `You popped ${s} right balloon${s === 1 ? '' : 's'}.`, best: b => ` Your best: ${b}.` },
     closet: { title: 'Plusy’s Closet', sub: 'Answer correctly to collect gold keys. Tap an item to buy, wear or take it off.', hats: 'Hats & hair', face: 'Face', bg: 'Background', wear: 'Wear', worn: 'Wearing', need: n => `Need ${n} more`, bought: n => `${n} bought!`, short: n => `Collect ${n} more gold keys to buy this.`, info: (c, o) => `${c} gold key${c === 1 ? '' : 's'} · ${o} item${o === 1 ? '' : 's'}` },
     chalTitle: '60-second Challenge', chalDesc: 'Mixed adding, 1 to 12. Answer as many as you can!', rec: 'Best', fist: 'Fist',
@@ -1234,20 +1368,21 @@ const I18N = {
     streakMsg: (p, s) => `${p} ${s} in a row!`,
     almost: (k, n, a) => `Almost! ${k} + ${n} = ${a}`, youSaid: v => ` (you said ${v})`, noNum: 'Plusy didn’t hear a number. Please say it again.',
     resTitles: ['Let’s try again!', 'Good job!', 'Great!', 'Excellent!'],
-    res3: n => `All correct! The Plus ${n} door is open!`,
+    res3: n => `All correct! The Plus ${n} roadblock is open!`,
     res0: (s, n) => `You got ${s} out of 12. Review Plus ${n} first, then try again.`,
     resMid: s => `You got ${s} out of 12. Play again to collect more stars.`,
     chNew: 'New record!', chGood: 'Great!', chOk: 'Good job!',
     chMsg: s => `You answered ${s} correctly in 60 seconds.`, chBest: b => ` Your best: ${b}.`, correctUnit: 'correct',
     again: 'Play again', learnNext: n => `Learn Plus ${n}`, review: n => `Review Plus ${n}`, menu: 'Main menu', notX: v => `(not ${v})`,
     hints: {
-      home: { touch: 'Tap a level on the map to start learning.', gesture: 'Show <b>1–10 fingers</b> and hold to pick a door. <b>11</b> = 1 finger on each hand. <b>12</b> = 1 finger (left) + 2 fingers (right). <b>Make a fist</b> for the Challenge.', voice: 'Say <b>“plus five”</b> to learn, <b>“quiz five”</b> for a quiz, <b>“challenge”</b> or <b>“balloons”</b>.' },
+      home: { touch: 'Tap a level on the map to start learning.', gesture: 'Show <b>1–10 fingers</b> and hold to pick a level. <b>11</b> = 1 finger on each hand. <b>12</b> = 1 finger (left) + 2 fingers (right). <b>Make a fist</b> for the Challenge.', voice: 'Say <b>“plus five”</b> to learn, <b>“quiz five”</b> for a quiz, <b>“roadblock”</b>, <b>“challenge”</b> or <b>“balloons”</b>.' },
       learn: { touch: 'Tap a row and watch the keys drop into the chests, then count them all.', gesture: 'Show fingers to pick a row (4 fingers = row 4). Row <b>11</b> = 1 + 1 fingers, row <b>12</b> = 1 + 2 fingers (two hands). <b>Make a fist</b> to start the quiz.', voice: 'Say a number, like <b>“four”</b>. Say <b>“read”</b> to hear them all, <b>“quiz”</b> to start the quiz.' },
       quiz: { touch: 'Tap the right answer.', gesture: 'Show <b>1, 2, 3 or 4 fingers</b> and hold to choose.', voice: 'Say the answer as soon as the question appears, like <b>“thirteen”</b>. Say <b>“repeat”</b> to hear the question.' },
       result: { touch: 'Choose what to do next.', gesture: 'Show the number of fingers on the button.', voice: 'Say <b>“play again”</b>, <b>“next”</b> or <b>“menu”</b>.' },
+      road: { touch: 'Tap the lane with the right answer and your car zooms there! (On a computer: ← → keys, and ↑ to boost.)', gesture: 'Show <b>1, 2 or 3 fingers</b> to pick a lane, and hold.', voice: 'Say the answer out loud, like <b>“fifteen”</b>. The car changes lanes.' },
       balloon: { touch: 'Tap the balloon with the right answer before it floats away!', gesture: 'Show <b>1–4 fingers</b> to match the number on a balloon, and hold.', voice: 'Say the answer out loud, like <b>“fifteen”</b>.' }
     },
-    bubble: { touch: 'Hi, I’m Plusy the magic door! Let’s learn adding while we play.', gesture: 'Hi, I’m Plusy! Hold up your fingers to the camera and I’ll count them.', voice: 'Hi, I’m Plusy! Speak up, I’m listening.' },
+    bubble: { touch: 'Hi, I’m Plusy, the roadblock guard! Answer adding questions to open the road.', gesture: 'Hi, I’m Plusy! Hold up your fingers to the camera and I’ll count them.', voice: 'Hi, I’m Plusy! Speak up, I’m listening.' },
     camera: 'Camera', microphone: 'Microphone', fingers: 'fingers',
     showHand: 'Show your hand to the camera.', hold: 'Hold it…', lower: 'Nice! Lower your hand first.', seen: v => `${v} fingers seen.`, fistSeen: 'Fist seen.',
     cam: {
@@ -1344,8 +1479,8 @@ const DOOR_FULL = 'data:image/webp;base64,UklGRhQEAQBXRUJQVlA4WAoAAAAQAAAALwIAfQ
 const starPts = (R, r) => Array.from({ length: 10 }, (_, i) => { const a = Math.PI / 180 * (-90 + i * 36), d = i % 2 ? r : R; return (Math.cos(a) * d).toFixed(1) + ',' + (Math.sin(a) * d).toFixed(1); }).join(' ');
 const GLASS_PATHS = '<path d="M716 452Q747 418 778 450" fill="none"/><path d="M562 470L520 462" fill="none"/><path d="M935 455L985 440" fill="none"/>';
 const ACC = {
-  flower: '<g transform="translate(965 150) rotate(15) scale(1.25)"><g fill="#FF8FB8" stroke="#E0558B" stroke-width="4"><circle cx="0" cy="-40" r="32"/><circle cx="38" cy="-12" r="32"/><circle cx="24" cy="33" r="32"/><circle cx="-24" cy="33" r="32"/><circle cx="-38" cy="-12" r="32"/></g><circle r="26" fill="#FFD23F" stroke="#E0A000" stroke-width="4"/></g>',
-  party: '<g transform="translate(705 95) scale(.9)"><path d="M-118 4L0-255L118 4Q0 34-118 4Z" fill="#FF4D8D" stroke="#C2185B" stroke-width="7" stroke-linejoin="round"/><path d="M-66-78H66" stroke="#FFD23F" stroke-width="22" stroke-linecap="round"/><path d="M-30-160H30" stroke="#5BC0F8" stroke-width="20" stroke-linecap="round"/><circle cx="0" cy="-258" r="27" fill="#FFD23F" stroke="#E0A000" stroke-width="5"/></g>',
+  hardhat: '<g transform="translate(705 100) scale(1.1)"><path d="M-118 0Q-118-122 0-126Q118-122 118 0Z" fill="#FFC300" stroke="#B88600" stroke-width="7" stroke-linejoin="round"/><path d="M-22-122V-6M22-122V-6" stroke="#E0A800" stroke-width="16"/><rect x="-152" y="-12" width="304" height="28" rx="13" fill="#FFC300" stroke="#B88600" stroke-width="7"/></g>',
+  cone: '<g transform="translate(705 92)"><path d="M-95 8L-28-230Q0-244 28-230L95 8Z" fill="#FF6A00" stroke="#A84300" stroke-width="7" stroke-linejoin="round"/><path d="M-67-90H67L53-140H-53Z" fill="#FFFFFF"/><path d="M-86-22H86L75-62H-75Z" fill="#FFFFFF"/><rect x="-132" y="0" width="264" height="30" rx="10" fill="#FF6A00" stroke="#A84300" stroke-width="7"/></g>',
   cap: '<g transform="translate(705 95) scale(1.05)"><path d="M-100 8V-52Q0-78 100-52V8Q0 30-100 8Z" fill="#2B2D52"/><path d="M0-158L205-98L0-38L-205-98Z" fill="#3A3D6E" stroke="#1E2040" stroke-width="7" stroke-linejoin="round"/><circle cx="0" cy="-98" r="13" fill="#FFD23F"/><path d="M0-98Q130-90 158-20" fill="none" stroke="#FFD23F" stroke-width="9" stroke-linecap="round"/><path d="M146-26H172L166 40H152Z" fill="#FFD23F"/></g>',
   crown: '<g transform="translate(705 90) scale(1.1)"><path d="M-125 6L-132-92L-66-40L0-128L66-40L132-92L125 6Q0 26-125 6Z" fill="#FFC400" stroke="#B07800" stroke-width="7" stroke-linejoin="round"/><circle cx="0" cy="-130" r="15" fill="#F03E5A" stroke="#B07800" stroke-width="4"/><circle cx="-132" cy="-94" r="12" fill="#3B82F6" stroke="#B07800" stroke-width="4"/><circle cx="132" cy="-94" r="12" fill="#17B04F" stroke="#B07800" stroke-width="4"/><circle cx="-62" cy="-14" r="11" fill="#3B82F6"/><circle cx="0" cy="-10" r="13" fill="#F03E5A"/><circle cx="62" cy="-14" r="11" fill="#17B04F"/></g>',
   glasses: '<g fill="rgba(255,255,255,.16)" stroke="#C2410C" stroke-width="15" stroke-linecap="round"><circle cx="640" cy="468" r="78"/><circle cx="857" cy="462" r="78"/>' + GLASS_PATHS + '</g>',
@@ -1353,15 +1488,15 @@ const ACC = {
   star: '<polygon transform="translate(935 600) rotate(-12)" points="' + starPts(44, 19) + '" fill="#FFD23F" stroke="#E09B00" stroke-width="6" stroke-linejoin="round"/>'
 };
 const ITEMS = [
-  { id: 'flower', slot: 'hat', price: 8, pv: '860 40 210 210', name: { ms: 'Bunga', en: 'Flower' } },
-  { id: 'party', slot: 'hat', price: 15, pv: '585 -175 240 315', name: { ms: 'Topi parti', en: 'Party hat' } },
+  { id: 'hardhat', slot: 'hat', price: 8, pv: '520 -50 370 185', name: { ms: 'Topi keselamatan', en: 'Hard hat' } },
+  { id: 'cone', slot: 'hat', price: 15, pv: '560 -255 290 395', name: { ms: 'Kon trafik', en: 'Traffic cone' } },
   { id: 'cap', slot: 'hat', price: 25, pv: '475 -85 460 225', name: { ms: 'Topi graduasi', en: 'Graduation cap' } },
   { id: 'crown', slot: 'hat', price: 40, pv: '550 -80 310 210', name: { ms: 'Mahkota', en: 'Crown' } },
   { id: 'glasses', slot: 'face', price: 10, pv: '500 360 500 210', name: { ms: 'Cermin mata', en: 'Glasses' } },
   { id: 'star', slot: 'face', price: 12, pv: '877 542 116 116', name: { ms: 'Pelekat bintang', en: 'Star sticker' } },
   { id: 'shades', slot: 'face', price: 20, pv: '500 360 500 210', name: { ms: 'Cermin mata hitam', en: 'Sunglasses' } },
-  { id: 'rainbow', slot: 'bg', price: 20, name: { ms: 'Pelangi', en: 'Rainbow' } },
-  { id: 'garden', slot: 'bg', price: 25, name: { ms: 'Taman', en: 'Garden' } },
+  { id: 'checker', slot: 'bg', price: 20, name: { ms: 'Bendera lumba', en: 'Race flag' } },
+  { id: 'city', slot: 'bg', price: 25, name: { ms: 'Bandar malam', en: 'Night city' } },
   { id: 'ocean', slot: 'bg', price: 25, name: { ms: 'Laut', en: 'Ocean' } },
   { id: 'space', slot: 'bg', price: 30, name: { ms: 'Angkasa', en: 'Space' } }
 ];
@@ -1435,6 +1570,9 @@ function sfx(k) {
     else if (k === 'win') [523, 659, 784, 1047].forEach((f, i) => tone(f, i * .12, .32));
     else if (k === 'coin') { tone(1320, 0, .07, 'sine', .1); tone(1760, .06, .14, 'sine', .1); }
     else if (k === 'combo') [523, 659, 784, 1047, 1319, 1568].forEach((f, i) => tone(f, i * .065, .24, 'triangle', .16));
+    else if (k === 'vroom') { tone(110, 0, .45, 'sawtooth', .07); glide(160, 520, .4, .1); }
+    else if (k === 'crash') { noise(.5, 500, .8); tone(90, 0, .3, 'square', .08); }
+    else if (k === 'unlock') { tone(1500, 0, .05, 'square', .05); tone(900, .07, .08, 'square', .05); }
     else if (k === 'pop') { noise(.18, 1500, .55); tone(300, 0, .07, 'sine', .14); }
     else if (k === 'hop') glide(380, 820, .18, .14);
     else if (k === 'boing') { glide(260, 620, .12, .14); glide(620, 380, .16, .1, .12); }
@@ -1522,12 +1660,13 @@ function cfStep() {
 const burstFrom = (el, n, spread) => { const r = el.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, n, spread); };
 
 /* ================= screens ================= */
-const screens = { home: $('#scrHome'), learn: $('#scrLearn'), quiz: $('#scrQuiz'), balloon: $('#scrBalloon'), result: $('#scrResult') };
+const screens = { home: $('#scrHome'), learn: $('#scrLearn'), quiz: $('#scrQuiz'), balloon: $('#scrBalloon'), road: $('#scrRoad'), result: $('#scrResult') };
 function show(name) {
   for (const [k, el] of Object.entries(screens)) el.hidden = k !== name;
   if (name !== 'learn' && S.reciting) stopRecite();
-  if (name !== 'quiz' && name !== 'balloon' && Q) { stopTimer(); clearTimeout(Q.timer); }
+  if (name !== 'quiz' && name !== 'balloon' && name !== 'road' && Q) { stopTimer(); clearTimeout(Q.timer); }
   if (name !== 'balloon') blStop();
+  if (name !== 'road') rdStop();
   S.screen = name; body.dataset.screen = name;
   clearHold();
   renderHints();
@@ -1552,6 +1691,7 @@ function applyLang() {
   if (S.screen === 'learn') { relabelLearn(); selectRow(S.row, false); }
   if (Q && Q.kind !== 'balloon') renderQuizTitle();
   if (Q && Q.kind === 'balloon') renderLives();
+  if (Q && Q.kind === 'road') rdLives();
   if (S.screen === 'result' && S.lastResult) renderResult();
   $('#reciteLbl').textContent = S.reciting ? T.stop : T.read;
   if (S.mode === 'gesture') camUI(S.camState);
@@ -1568,6 +1708,7 @@ function renderHome() {
   const T = L(), p = P();
   renderMap();
   $('#blBest').textContent = p.balloonBest || 0;
+  $('#rdBest').textContent = p.roadBest || 0;
   const total = Object.values(p.stars).reduce((a, b) => a + b, 0);
   const mastered = Object.values(p.stars).filter(v => v >= 3).length;
   $('#stStars').innerHTML = `${total}<small>/36</small>`;
@@ -1798,6 +1939,9 @@ function finish() {
   } else if (kind === 'balloon') {
     R.best = sc > (p.balloonBest || 0) && sc > 0;
     if (R.best) { p.balloonBest = sc; bonus = 5; }
+  } else if (kind === 'road') {
+    R.best = sc > (p.roadBest || 0) && sc > 0;
+    if (R.best) { p.roadBest = sc; bonus = 5; }
   } else {
     R.stars = sc >= 12 ? 3 : sc >= 10 ? 2 : sc >= 6 ? 1 : 0;
     if (sc === Q.total) bonus = 5;
@@ -1807,10 +1951,10 @@ function finish() {
   S.lastResult = R;
   const { title, msg } = renderResult();
   show('result');
-  const happy = R.ch ? true : R.kind === 'balloon' ? sc > 0 : R.stars >= 1;
+  const happy = R.ch ? true : R.kind === 'balloon' || R.kind === 'road' ? sc > 0 : R.stars >= 1;
   setMood($('#rMascot'), happy ? 'happy' : 'sad');
   sfx('win');
-  if (R.ch || R.kind === 'balloon' ? sc > 0 : R.stars >= 1) setTimeout(() => burst(innerWidth / 2, innerHeight * .3, R.stars === 3 || R.best ? 130 : 70, 1.3), 150);
+  if (R.ch || R.kind === 'balloon' || R.kind === 'road' ? sc > 0 : R.stars >= 1) setTimeout(() => burst(innerWidth / 2, innerHeight * .3, R.stars === 3 || R.best ? 130 : 70, 1.3), 150);
   say(`${title} ${msg}`);
 }
 function renderResult() {
@@ -1822,6 +1966,9 @@ function renderResult() {
   } else if (R.kind === 'review') {
     title = T.rv.titles[R.stars];
     msg = T.rv.resMsg(R.sc, weakFacts().length);
+  } else if (R.kind === 'road') {
+    title = R.best ? T.rd.titleNew : R.sc >= 10 ? T.rd.good : T.rd.ok;
+    msg = T.rd.msg(R.sc) + (R.best ? '' : T.rd.best(P().roadBest || 0));
   } else if (R.kind === 'balloon') {
     title = R.best ? T.bl.titleNew : R.sc >= 10 ? T.bl.good : T.bl.ok;
     msg = T.bl.msg(R.sc) + (R.best ? '' : T.bl.best(P().balloonBest || 0));
@@ -1832,7 +1979,7 @@ function renderResult() {
   $('#rTitle').textContent = title;
   $('#rMsg').textContent = msg;
   const rs = $('#rStars'); rs.hidden = R.kind !== 'sifir'; rs.innerHTML = starsHTML(R.stars);
-  $('#rScore').innerHTML = R.ch ? `${R.sc}<small> ${T.correctUnit}</small>` : R.kind === 'balloon' ? `${R.sc}<small> ${T.bl.unit}</small>` : `${R.sc}<small>/12</small>`;
+  $('#rScore').innerHTML = R.ch ? `${R.sc}<small> ${T.correctUnit}</small>` : R.kind === 'road' ? `${R.sc}<small> ${T.rd.unit}</small>` : R.kind === 'balloon' ? `${R.sc}<small> ${T.bl.unit}</small>` : `${R.sc}<small>/12</small>`;
   const re = $('#rEarned'); re.hidden = !R.carrots; re.innerHTML = CARROT + esc(T.carrotsEarned(R.carrots));
   const rv = $('#rReview');
   rv.innerHTML = R.wrong.slice(0, 8).map(w => `<li>${w.k} + ${w.n} = ${w.ans}${w.got != null ? ` <span>${T.notX(w.got)}</span>` : ''}</li>`).join('');
@@ -1841,6 +1988,7 @@ function renderResult() {
   const acts = R.kind === 'ch' ? [['again', T.again, startChallenge], ['menu', T.menu, goHome]]
     : R.kind === 'review' ? [['again', T.again, startReview], ['menu', T.menu, goHome]]
     : R.kind === 'balloon' ? [['again', T.again, startBalloon], ['menu', T.menu, goHome]]
+    : R.kind === 'road' ? [['again', T.again, startRoad], ['menu', T.menu, goHome]]
     : [['again', T.again, () => startQuiz(R.n)],
        R.stars >= 2 ? ['next', T.learnNext(nx), () => openLearn(nx)] : ['next', T.review(R.n), () => openLearn(R.n)],
        ['menu', T.menu, goHome]];
@@ -2081,6 +2229,7 @@ function canGrow(v, valid) {
 function liveAnswers() {
   if (anySheet() || !Q || Q.answered) return null;
   if (S.screen === 'quiz' && Q.opts) return Q.opts.slice();
+  if (S.screen === 'road' && Q.kind === 'road' && Q.opts) return Q.opts.slice();
   if (S.screen === 'balloon' && Q.kind === 'balloon') return BL.balloons.filter(b => !b.popped && !b.gone).map(b => b.v);
   return null;
 }
@@ -2172,7 +2321,8 @@ const KW = {
   again: ['lagi', 'ulang', 'semula', 'main', 'again', 'play', 'retry', 'replay'],
   review: ['ulang kaji', 'ulangkaji', 'latihan', 'review', 'practice', 'practise'],
   closet: ['almari', 'closet', 'wardrobe', 'kedai', 'shop'],
-  balloon: ['belon', 'balloon', 'balloons', 'pop']
+  balloon: ['belon', 'balloon', 'balloons', 'pop'],
+  road: ['sekatan', 'jalan', 'kereta', 'lumba', 'pandu', 'road', 'roadblock', 'car', 'race', 'drive', 'rush']
 };
 /* Returns true when the words led to an action. */
 function onVoice(alts, how = 'final') { return voiceAct(alts, how) !== false; }
@@ -2183,11 +2333,12 @@ function voiceAct(alts, how) {
   const nums = alts.map(parseNumber).filter(v => v != null);
   const click = sel => { const b = screens[S.screen].querySelector(sel); if (b) { b.click(); return true; } return false; };
   if (anySheet()) return false;
-  if (quick && S.screen !== 'quiz' && S.screen !== 'balloon') return false;
+  if (quick && S.screen !== 'quiz' && S.screen !== 'balloon' && S.screen !== 'road') return false;
   switch (S.screen) {
     case 'home':
       if (has('review')) return startReview();
       if (has('closet')) return openCloset();
+      if (has('road')) return startRoad();
       if (has('challenge')) return startChallenge();
       if (has('balloon')) return startBalloon();
       if (nums.length && nums[0] >= 1 && nums[0] <= 12) { sfx('tap'); return has('quiz') ? startQuiz(nums[0]) : openLearn(nums[0]); }
@@ -2208,6 +2359,15 @@ function voiceAct(alts, how) {
       }
       if (partial) return false;
       if (Q && !Q.answered) { $('#fb').className = 'fb'; $('#fb').textContent = L().noNum; }
+      return;
+    case 'road':
+      if (has('stop')) return goHome();
+      if (nums.length && Q && Q.kind === 'road' && !Q.answered && Q.opts) {
+        const v = nums.includes(Q.ans) && Q.opts.includes(Q.ans) ? Q.ans : nums.find(x => Q.opts.includes(x));
+        if (v != null) return rdPick(Q.opts.indexOf(v), true);
+        if (partial) return false;
+        rdSay(L().rd.noLane(nums[0]), 'no');
+      }
       return;
     case 'balloon':
       if (has('stop')) return goHome();
@@ -2818,6 +2978,135 @@ function blMiss() {
   blSetStreak();
   Q.timer = setTimeout(Q.lives > 0 ? blRound : finish, 1600);
 }
+
+
+/* ================= Roadblock Rush: steer into the lane whose gate shows the right sum ================= */
+const CAR_SVG = '<svg viewBox="0 0 60 100" aria-hidden="true"><rect x="1" y="16" width="11" height="20" rx="4" fill="#15171C"/><rect x="48" y="16" width="11" height="20" rx="4" fill="#15171C"/><rect x="1" y="66" width="11" height="22" rx="4" fill="#15171C"/><rect x="48" y="66" width="11" height="22" rx="4" fill="#15171C"/><path d="M15 9Q30 1 45 9L50 40Q52 62 50 89Q30 99 10 89Q8 62 10 40Z" fill="#FF6A00" stroke="#A84300" stroke-width="2.5"/><path d="M26 3h8v94h-8z" fill="#FFFFFF" opacity=".9"/><path d="M17 31Q30 25 43 31L41 45Q30 42 19 45Z" fill="#8FD3FF" stroke="#1B2233" stroke-width="2"/><path d="M19 71Q30 74 41 71L42 80Q30 83 18 80Z" fill="#8FD3FF" stroke="#1B2233" stroke-width="2"/><circle cx="30" cy="58" r="8.5" fill="#FFFFFF" stroke="#1B2233" stroke-width="1.5"/><path d="M30 53v10M25 58h10" stroke="#E8590C" stroke-width="3.2" stroke-linecap="round"/><rect x="14" y="7" width="8" height="4" rx="2" fill="#FFF3B0"/><rect x="38" y="7" width="8" height="4" rx="2" fill="#FFF3B0"/><rect x="13" y="89" width="9" height="3.5" rx="1.7" fill="#FF3B3B"/><rect x="38" y="89" width="9" height="3.5" rx="1.7" fill="#FF3B3B"/></svg>';
+const RD = { on: false, raf: 0, last: 0, y: -200, off: 0, lane: 1, speed: 0, boost: false, phase: 'idle', gh: 120 };
+$('#rdCar').innerHTML = CAR_SVG; $('#rcIcon').innerHTML = CAR_SVG;
+$$('.rd-lane').forEach((b, i) => { b.querySelector('.fbadge').innerHTML = handSVG(i + 1) + (i + 1); b.addEventListener('click', () => rdPick(i, true)); });
+const rdGates = () => $$('#rdBlock .rd-gate');
+function rdLives() {
+  const n = Q && Q.kind === 'road' ? Q.lives : 3, el = $('#rdLives');
+  el.innerHTML = [0, 1, 2].map(i => HEART.replace('<svg', `<svg class="${i < n ? 'on' : 'lost'}"`)).join('');
+  el.setAttribute('aria-label', `${L().bl.lives}: ${n}`);
+}
+function rdSay(text, cls) { const m = $('#rdMsg'); m.className = 'bl-msg rd-msg' + (cls ? ' ' + cls : ''); m.innerHTML = text ? `<span>${esc(text)}</span>` : ''; }
+function rdStreak() { $('#rdStreak').hidden = Q.streak < 2; $('#rdStreakN').textContent = Q.streak; $('#rdStreak').classList.toggle('fire', Q.streak >= 3); }
+function rdLayout() {
+  const tr = $('#rdTrack'), W = tr.clientWidth, H = tr.clientHeight; if (!W) return;
+  RD.gh = Math.max(96, Math.min(150, H * .22)); $('#rdBlock').style.setProperty('--gh', RD.gh + 'px');
+  const cw = Math.min(84, W / 3 * .5); tr.style.setProperty('--cw', cw + 'px');
+  $('#rdCar').style.transform = `translateX(${(W * (RD.lane + .5) / 3 - cw / 2).toFixed(1)}px)`;
+  RD.carTop = H - 22 - cw * 100 / 60;
+}
+const rdKmh = () => Math.round(40 + (RD.speed / RD.base - 1) * 100);
+function rdStop() { RD.on = false; cancelAnimationFrame(RD.raf); RD.phase = 'idle'; $('#rdCar').classList.remove('boost', 'crash'); }
+function startRoad() {
+  if (Q) { stopTimer(); clearTimeout(Q.timer); }
+  rdStop();
+  Q = newQ('road', { lives: 3 });
+  show('road');
+  RD.lane = 1; RD.y = -400; RD.boost = false; rdLayout();
+  RD.base = $('#rdTrack').clientHeight / 5.2; RD.speed = RD.base;
+  $('#rdScore').textContent = 0; $('#rdCarrotsN').textContent = 0; $('#rdSpeed').textContent = rdKmh();
+  $('#rdA').textContent = '?'; $('#rdB').textContent = '?'; $('#rdSlot').textContent = '?'; $('#rdSlot').className = 'slot';
+  rdGates().forEach(g => { g.className = 'rd-gate'; g.querySelector('.rd-lock').textContent = '?'; });
+  rdStreak(); rdLives(); rdSay('');
+  RD.on = true; RD.last = 0; RD.raf = requestAnimationFrame(rdTick);
+  const go = $('#rdGo'); go.innerHTML = `<span>${esc(L().rd.go)}</span>`; setTimeout(() => { go.innerHTML = ''; }, 800);
+  say(L().rd.start); sfx('vroom');
+  Q.timer = setTimeout(rdRound, 900);
+}
+function rdQuestion() {
+  /* Gentle start: small numbers first, then the full 1–12 range. Tricky questions come back now and then. */
+  const lvl = Q.score, weak = weakFacts().filter(([a, b]) => Q.last !== a + 'x' + b);
+  let k, n;
+  if (lvl >= 4 && weak.length && Math.random() < .3) [k, n] = weak[Math.floor(Math.random() * Math.min(weak.length, 6))];
+  else {
+    const maxN = lvl < 5 ? 5 : lvl < 12 ? 9 : 12, maxK = lvl < 5 ? 9 : 12;
+    do { n = 1 + Math.floor(Math.random() * maxN); k = 1 + Math.floor(Math.random() * maxK); } while (Q.last === k + 'x' + n);
+  }
+  return [k, n];
+}
+function rdRound() {
+  if (!Q || Q.kind !== 'road' || !RD.on) return;
+  const [k, n] = rdQuestion(), ans = k + n;
+  Q.last = k + 'x' + n; Q.i++;
+  const opts = shuffle([ans, ...makeOptions(k, n).filter(v => v !== ans).slice(0, 2)]);
+  Object.assign(Q, { k, n2: n, ans, answered: false, opts });
+  $('#rdA').textContent = k; $('#rdB').textContent = n;
+  $('#rdSlot').textContent = '?'; $('#rdSlot').className = 'slot';
+  rdGates().forEach((g, i) => { g.className = 'rd-gate'; g.querySelector('.rd-lock').textContent = opts[i]; });
+  $$('.rd-lane').forEach((b, i) => { b.disabled = false; b.setAttribute('aria-label', `${i + 1}: ${opts[i]}`); });
+  $('#rdCar').classList.remove('boost', 'crash'); $('#rdMascot').dataset.mood = '';
+  rdSay(''); RD.boost = false; RD.y = -RD.gh - 10; RD.phase = 'coming';
+  if (S.mode !== 'voice') say(L().tts.q(k, n));
+}
+function rdPick(lane, go) {
+  if (!Q || Q.kind !== 'road' || lane < 0 || lane > 2) return;
+  clearHold();
+  if (RD.lane !== lane) { RD.lane = lane; rdLayout(); sfx('tap'); }
+  if (go && RD.phase === 'coming' && !Q.answered) { RD.boost = true; $('#rdCar').classList.add('boost'); sfx('vroom'); }
+}
+function rdTick(t) {
+  if (!RD.on) return;
+  RD.raf = requestAnimationFrame(rdTick);
+  const dt = RD.last ? Math.min(.05, (t - RD.last) / 1000) : 0; RD.last = t;
+  const v = RD.phase === 'crash' ? RD.speed * .15 : RD.speed * (RD.boost ? 3.2 : 1.6);
+  RD.off = (RD.off + v * dt) % 1400;
+  $('#road').style.setProperty('--off', RD.off.toFixed(1) + 'px');
+  if (RD.phase === 'coming' || RD.phase === 'pass') {
+    RD.y += RD.speed * (RD.boost ? 3.6 : 1) * dt;
+    if (RD.phase === 'coming' && RD.y + RD.gh >= RD.carTop + 6) rdResolve();
+  }
+  $('#rdBlock').style.transform = `translateY(${RD.y.toFixed(1)}px)`;
+}
+function rdResolve() {
+  const T = L(), lane = RD.lane, v = Q.opts[lane], ok = v === Q.ans, gates = rdGates(), car = $('#rdCar'), m = $('#rdMascot');
+  Q.answered = true; noteFact(Q.k, Q.n2, ok);
+  $$('.rd-lane').forEach(b => { b.disabled = true; });
+  $('#rdSlot').textContent = Q.ans; $('#rdSlot').classList.add('ok');
+  const right = Q.opts.indexOf(Q.ans);
+  if (ok) {
+    RD.phase = 'pass'; RD.boost = true;
+    gates[lane].classList.add('open'); sfx('unlock'); setTimeout(() => sfx('ok'), 80);
+    burstFrom(gates[lane], 40, .9);
+    Q.score++; Q.streak++; Q.earned++; P().carrots++;
+    const earned = Q.earned;
+    $('#rdScore').textContent = Q.score;
+    flyCarrot(gates[lane], $('#rdCarrots'), () => { $('#rdCarrotsN').textContent = earned; });
+    const combo = comboFx(Q.streak);
+    rdSay(combo ? '' : T.praise[Math.floor(Math.random() * T.praise.length)], 'ok');
+    setMood(m, 'happy');
+    RD.speed = Math.min(RD.base * 2.2, RD.speed * 1.06); $('#rdSpeed').textContent = rdKmh();
+    Q.timer = setTimeout(rdRound, 900);
+  } else {
+    RD.phase = 'crash'; RD.boost = false;
+    gates[lane].classList.add('hit'); car.classList.remove('boost'); car.classList.add('crash');
+    setTimeout(() => { if (Q && Q.kind === 'road') gates[right].classList.add('open'); }, 450);
+    sfx('crash'); shakeApp(true);
+    Q.streak = 0; Q.lives--;
+    Q.wrong.push({ k: Q.k, n: Q.n2, ans: Q.ans, got: v });
+    rdSay(T.rd.wrong(Q.k, Q.n2, Q.ans), 'no');
+    setMood(m, 'sad'); rdLives();
+    const el = $('#rdLives'); el.classList.remove('hit'); void el.offsetWidth; el.classList.add('hit');
+    RD.speed = Math.max(RD.base, RD.speed * .92); $('#rdSpeed').textContent = rdKmh();
+    if (S.mode !== 'voice') say(T.tts.full(Q.k, Q.n2));
+    Q.timer = setTimeout(Q.lives > 0 ? rdRound : finish, 2000);
+  }
+  save(); rdStreak();
+}
+addEventListener('keydown', e => {
+  if (S.screen !== 'road' || anySheet() || !Q || Q.kind !== 'road') return;
+  if (e.key === 'ArrowLeft') { e.preventDefault(); rdPick(Math.max(0, RD.lane - 1), false); }
+  else if (e.key === 'ArrowRight') { e.preventDefault(); rdPick(Math.min(2, RD.lane + 1), false); }
+  else if (e.key === 'ArrowUp' || e.key === ' ') { e.preventDefault(); rdPick(RD.lane, true); }
+  else if (/^[123]$/.test(e.key)) rdPick(+e.key - 1, true);
+});
+if (window.ResizeObserver) new ResizeObserver(() => { if (S.screen === 'road') rdLayout(); }).observe($('#road'));
+$('#btnRoad').addEventListener('click', () => { sfx('tap'); startRoad(); });
+$('#rdBack').addEventListener('click', goHome);
 
 /* ================= wire up ================= */
 $$('[data-set-mode]').forEach(b => b.addEventListener('click', () => { audio(); sfx('tap'); setMode(b.dataset.setMode, true); }));
