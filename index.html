@@ -6,7 +6,7 @@
 <style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Plus Mania</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Plus Mania: apps tambah 1–12 dwibahasa (BM/EN) untuk murid sekolah rendah, bersama Plusy penjaga sekatan jalan. Belajar, kuiz dan cabaran dengan sentuhan, isyarat tangan atau arahan suara.">
+<meta name="description" content="Plus Mania: apps tambah hingga 20 dwibahasa (BM/EN) untuk kanak-kanak 6–7 tahun (prasekolah & Tahun 1), bersama Plusy penjaga sekatan jalan. Belajar, kuiz dan cabaran dengan sentuhan, isyarat tangan atau arahan suara.">
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#C2410C">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
@@ -904,12 +904,12 @@ body::after{display:none}
         <div class="mascot" id="homeMascot"></div>
         <div class="hero-t">
           <h1 class="title">Plus Mania<span class="tx" aria-hidden="true">+</span></h1>
-          <p class="sub" data-i18n="sub">Tambah 1 hingga 12 · Misi Sekatan Jalan</p>
+          <p class="sub" data-i18n="sub">Tambah hingga 20 · Umur 6–7 tahun</p>
         </div>
         <p class="bubble" id="homeBubble"></p>
         <div class="stats">
-          <div class="stat"><span class="si y" id="icStar"></span><div><b id="stStars">0<small>/36</small></b><span data-i18n="stats.stars">Bintang</span></div></div>
-          <div class="stat"><span class="si g" id="icMedal"></span><div><b id="stMastered">0<small>/12</small></b><span data-i18n="stats.mastered">Sekatan dibuka</span></div></div>
+          <div class="stat"><span class="si y" id="icStar"></span><div><b id="stStars">0<small>/30</small></b><span data-i18n="stats.stars">Bintang</span></div></div>
+          <div class="stat"><span class="si g" id="icMedal"></span><div><b id="stMastered">0<small>/10</small></b><span data-i18n="stats.mastered">Sekatan dibuka</span></div></div>
           <button class="stat" id="stCarrotBtn"><span class="si c" id="icCarrot"></span><div><b id="stCarrots">0</b><span data-i18n="stats.carrots">Kunci emas</span></div></button>
           <div class="stat"><span class="si o" id="icTrophy"></span><div><b id="stBest">0</b><span data-i18n="stats.best">Rekod cabaran</span></div></div>
         </div>
@@ -1226,12 +1226,12 @@ const weakFacts = () => Object.entries(P().facts).filter(([, r]) => r.b >= 0 && 
   .sort(([, a], [, b]) => a.b - b.b || b.w - a.w || a.t - b.t).map(([k]) => k.split('x').map(Number));
 function reviewSet() {
   const facts = P().facts, picked = new Map();
-  const add = (k, n) => { const key = k + 'x' + n; if (!picked.has(key) && picked.size < 12) picked.set(key, [k, n]); };
+  const add = (k, n) => { const key = k + 'x' + n; if (!picked.has(key) && picked.size < 10) picked.set(key, [k, n]); };
   weakFacts().forEach(([k, n]) => add(k, n));
   Object.entries(facts).filter(([, r]) => r.b < 4).sort(([, a], [, b]) => a.b - b.b || a.t - b.t).forEach(([key]) => { const [k, n] = key.split('x').map(Number); add(k, n); });
   const played = [...new Set(Object.keys(facts).map(k => +k.split('x')[1]))];
-  const pool = played.length ? played : [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  for (let guard = 0; picked.size < 12 && guard < 600; guard++) add(1 + Math.floor(Math.random() * 12), pool[Math.floor(Math.random() * pool.length)]);
+  const pool = played.length ? played : [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  for (let guard = 0; picked.size < 10 && guard < 600; guard++) add(1 + Math.floor(Math.random() * 10), pool[Math.floor(Math.random() * pool.length)]);
   return shuffle([...picked.values()]);
 }
 
@@ -1302,7 +1302,7 @@ function parseNumber(text) {
 /* ================= words in both languages ================= */
 const I18N = {
   ms: {
-    sub: 'Tambah 1 hingga 12 · Misi Sekatan Jalan',
+    sub: 'Tambah hingga 20 · Umur 6–7 tahun',
     cs: { title: 'Kejar Pencuri', desc: 'Jawab pantas untuk kejar kereta pencuri. Bila dekat, Plusy sekat jalan dan tangkap dia!', score: 'Ditangkap', unit: 'pencuri', start: 'Pencuri lari! Kejar dia!', go: 'KEJAR!', caught: 'DITANGKAP!', escaped: 'Alamak, pencuri terlepas!', next: 'Pencuri baharu, lebih laju!', wrong: (k, n, a) => `Tergelincir! ${k} + ${n} = ${a}`, titleNew: 'Rekod baharu!', good: 'Polis hebat!', ok: 'Bagus!', msg: (s, c) => `Kamu tangkap ${s} pencuri dan jawab ${c} soalan betul.`, best: b => ` Rekod terbaik kamu: ${b}.` },
     rd: { title: 'Sekatan Jalan', tag: 'BAHARU', desc: 'Pandu kereta ke lorong yang ada jawapan betul. Kunci terbuka, sekatan dibuka, vroom!', score: 'Sekatan', start: 'Sedia… mula… PECUT!', go: 'PECUT!', wrong: (k, n, a) => `Bum! ${k} + ${n} = ${a}`, titleNew: 'Rekod baharu!', good: 'Pemandu hebat!', ok: 'Bagus!', unit: 'sekatan', msg: s => `Kamu buka ${s} sekatan jalan.`, best: b => ` Rekod terbaik kamu: ${b}.`, noLane: v => `Tiada lorong ${v}. Cuba lagi!` },
     modeTitle: 'Cara main', pick: 'Lebuhraya Tambah', mapNote: 'Setiap tahap ada sekatan jalan. Dapatkan 3 bintang untuk membukanya, dan Plusy akan bergerak ke tahap seterusnya!', gamesTitle: 'Permainan', tileK: 'Tambah', tableWord: 'Tambah',
@@ -1310,14 +1310,14 @@ const I18N = {
     modes: { touch: ['Sentuh', 'Sentuh jawapan pada skrin.'], gesture: ['Isyarat Tangan', 'Tunjuk jari ke kamera, tahan sekejap untuk pilih.'], voice: ['Arahan Suara', 'Sebut jawapan dengan kuat, contoh “lima belas”.'] },
     stats: { stars: 'Bintang', mastered: 'Sekatan dibuka', best: 'Rekod cabaran', carrots: 'Kunci emas' },
     who: { title: 'Siapa bermain?', add: 'Tambah pemain', addTitle: 'Pemain baharu', editTitle: 'Ubah pemain', edit: 'Ubah', nameLbl: 'Nama', namePh: 'Contoh: Aisyah', colorLbl: 'Warna', save: 'Simpan', cancel: 'Batal', del: 'Padam pemain', delConfirm: n => `Padam ${n}? Semua bintang dan kunci emas ${n} akan hilang.`, delYes: 'Ya, padam', player: i => `Pemain ${i}`, hello: n => `Hai ${n}! Jom main.`, reset: 'Padam semua pemain di peranti ini', resetNote: 'Nama dan markah disimpan dalam peranti ini sahaja. Orang lain yang buka pautan Plus Mania di peranti mereka tidak nampak data ini.', resetMsg: 'Semua nama, bintang, lobak merah dan barang almari di peranti ini akan dipadam. Plusy akan bermula semula seperti baharu.', resetYes: 'Ya, padam semua', resetDone: 'Semua pemain sudah dipadam. Plusy bermula semula.' },
-    rv: { title: 'Ulang Kaji Pintar', btn: 'Ulang kaji pintar', weak: n => `${n} soalan perlu latihan`, none: 'Tiada soalan sukar. Hebat!', empty: 'Main kuiz dahulu. Plusy akan ingat soalan yang sukar.', titles: ['Teruskan berlatih!', 'Bagus!', 'Hebat!', 'Cemerlang!'], resMsg: (s, left) => `Kamu jawab ${s} daripada 12 betul. ` + (left ? `Masih ada ${left} soalan untuk dilatih.` : 'Semua soalan sukar sudah dikuasai!') },
+    rv: { title: 'Ulang Kaji Pintar', btn: 'Ulang kaji pintar', weak: n => `${n} soalan perlu latihan`, none: 'Tiada soalan sukar. Hebat!', empty: 'Main kuiz dahulu. Plusy akan ingat soalan yang sukar.', titles: ['Teruskan berlatih!', 'Bagus!', 'Hebat!', 'Cemerlang!'], resMsg: (s, left) => `Kamu jawab ${s} soalan betul. ` + (left ? `Masih ada ${left} soalan untuk dilatih.` : 'Semua soalan sukar sudah dikuasai!') },
     carrotsEarned: n => `Kamu dapat ${n} kunci emas!`,
-    map: { next: n => `Vroom! Sekatan terbuka! Jom ke Tambah ${n}!`, allDone: 'Hebat! Semua 12 sekatan sudah dibuka. Kamu juara lebuhraya!' },
+    map: { next: n => `Vroom! Sekatan terbuka! Jom ke Tambah ${n}!`, allDone: 'Hebat! Semua 10 sekatan sudah dibuka. Kamu juara lebuhraya!' },
     combo: ['HEBAT!', 'SUPER!', 'LUAR BIASA!', 'JUARA!'], streakSmall: n => `${n} betul berturut-turut`,
     poke: ['Berhenti! Jawab dulu soalan saya!', 'Vroom, vroom!', 'Saya suka kunci emas!', 'Kamu pemandu hebat!', 'Sekatan dibuka!'],
     bl: { title: 'Pop Belon', desc: 'Pecahkan belon jawapan yang betul sebelum ia terbang!', score: 'Skor', lives: 'Nyawa', unit: 'belon', start: 'Belon datang!', wrong: (k, n, a) => `Alamak! ${k} + ${n} = ${a}`, miss: (k, n, a) => `Terlepas! ${k} + ${n} = ${a}`, noBalloon: v => `Tiada belon ${v}. Cuba lagi!`, titleNew: 'Rekod baharu!', good: 'Hebat!', ok: 'Bagus!', msg: s => `Kamu pecahkan ${s} belon yang betul.`, best: b => ` Rekod terbaik kamu: ${b}.` },
     closet: { title: 'Almari Plusy', sub: 'Jawab soalan dengan betul untuk kumpul kunci emas. Tekan barang untuk beli, pakai atau tanggalkan.', hats: 'Topi & hiasan kepala', face: 'Muka', bg: 'Latar', wear: 'Pakai', worn: 'Dipakai', need: n => `Perlu ${n} lagi`, bought: n => `${n} sudah dibeli!`, short: n => `Kumpul ${n} kunci emas lagi untuk beli barang ini.`, info: (c, o) => `${c} kunci emas · ${o} barang` },
-    chalTitle: 'Cabaran 60 saat', chalDesc: 'Soalan tambah campur, 1 hingga 12. Jawab seberapa banyak yang boleh!', rec: 'Rekod', fist: 'Genggam',
+    chalTitle: 'Cabaran 60 saat', chalDesc: 'Soalan tambah campur, hingga 20. Jawab seberapa banyak yang boleh!', rec: 'Rekod', fist: 'Genggam',
     installCta: 'Pasang di telefon & komputer', installSub: 'Android, iPhone & iPad, Windows dan Mac. Tekan untuk panduan.',
     back: 'Menu', exit: 'Keluar', read: 'Baca semua', stop: 'Berhenti',
     startQuiz: n => `Mula Kuiz Tambah ${n}`, quizTitle: n => `Kuiz Tambah <span class="numpill">${n}</span>`, chTitle: 'Cabaran 60 saat',
@@ -1328,16 +1328,16 @@ const I18N = {
     streakMsg: (p, s) => `${p} ${s} betul berturut-turut!`,
     almost: (k, n, a) => `Hampir! ${k} + ${n} = ${a}`, youSaid: v => ` (kamu sebut ${v})`, noNum: 'Plusy tak dengar nombor. Cuba sebut sekali lagi.',
     resTitles: ['Jom cuba lagi!', 'Bagus!', 'Hebat!', 'Cemerlang!'],
-    res3: n => `Semua betul! Sekatan Tambah ${n} dibuka!`,
-    res0: (s, n) => `Kamu jawab ${s} daripada 12 betul. Ulang kaji Tambah ${n} dahulu, kemudian cuba lagi.`,
-    resMid: s => `Kamu jawab ${s} daripada 12 betul. Cuba lagi untuk kumpul lebih banyak bintang.`,
+    res3: n => `Hebat! Sekatan Tambah ${n} dibuka!`,
+    res0: (s, n) => `Kamu jawab ${s} daripada 10 betul. Ulang kaji Tambah ${n} dahulu, kemudian cuba lagi.`,
+    resMid: s => `Kamu jawab ${s} daripada 10 betul. Cuba lagi untuk kumpul lebih banyak bintang.`,
     chNew: 'Rekod baharu!', chGood: 'Hebat!', chOk: 'Bagus!',
     chMsg: s => `Kamu jawab ${s} soalan betul dalam 60 saat.`, chBest: b => ` Rekod terbaik kamu: ${b}.`, correctUnit: 'betul',
     again: 'Main lagi', learnNext: n => `Belajar Tambah ${n}`, review: n => `Ulang kaji Tambah ${n}`, menu: 'Menu utama', notX: v => `(bukan ${v})`,
     hints: {
-      home: { touch: 'Sentuh satu tahap di peta untuk mula belajar.', gesture: 'Tunjuk <b>1–10 jari</b> dan tahan untuk pilih tahap. <b>11</b> = 1 jari setiap tangan. <b>12</b> = 1 jari (kiri) + 2 jari (kanan). <b>Genggam tangan</b> untuk Cabaran.', voice: 'Sebut <b>“tambah lima”</b> untuk belajar, <b>“kuiz lima”</b> untuk kuiz, <b>“sekatan”</b>, <b>“kejar”</b> atau <b>“cabaran”</b>.' },
-      learn: { touch: 'Sentuh satu baris dan lihat kunci jatuh ke dalam peti, kemudian kira semuanya.', gesture: 'Tunjuk jari untuk pilih baris (4 jari = baris 4). Baris <b>11</b> = 1 + 1 jari, baris <b>12</b> = 1 + 2 jari (dua tangan). <b>Genggam tangan</b> untuk mula kuiz.', voice: 'Sebut nombor, contoh <b>“empat”</b>. Sebut <b>“baca”</b> untuk dengar semua, <b>“kuiz”</b> untuk mula kuiz.' },
-      quiz: { touch: 'Sentuh jawapan yang betul.', gesture: 'Tunjuk <b>1, 2, 3 atau 4 jari</b> dan tahan untuk pilih jawapan.', voice: 'Terus sebut jawapan sebaik soalan keluar, contoh <b>“tiga belas”</b>. Sebut <b>“ulang”</b> untuk dengar soalan.' },
+      home: { touch: 'Sentuh satu tahap di peta untuk mula belajar.', gesture: 'Tunjuk <b>1–10 jari</b> dan tahan untuk pilih tahap. <b>Genggam tangan</b> untuk Cabaran.', voice: 'Sebut <b>“tambah lima”</b> untuk belajar, <b>“kuiz lima”</b> untuk kuiz, <b>“sekatan”</b>, <b>“kejar”</b> atau <b>“cabaran”</b>.' },
+      learn: { touch: 'Sentuh satu baris dan lihat kunci jatuh ke dalam peti, kemudian kira semuanya.', gesture: 'Tunjuk jari untuk pilih baris (4 jari = baris 4). <b>Genggam tangan</b> untuk mula kuiz.', voice: 'Sebut nombor, contoh <b>“empat”</b>. Sebut <b>“baca”</b> untuk dengar semua, <b>“kuiz”</b> untuk mula kuiz.' },
+      quiz: { touch: 'Sentuh jawapan yang betul.', gesture: 'Tunjuk <b>1, 2, 3 atau 4 jari</b> dan tahan untuk pilih jawapan.', voice: 'Terus sebut jawapan sebaik soalan keluar, contoh <b>“lapan”</b>. Sebut <b>“ulang”</b> untuk dengar soalan.' },
       result: { touch: 'Pilih apa yang kamu mahu buat seterusnya.', gesture: 'Tunjuk jari ikut nombor pada butang.', voice: 'Sebut <b>“main lagi”</b>, <b>“seterusnya”</b> atau <b>“menu”</b>.' },
       chase: { touch: 'Sentuh jawapan betul secepat mungkin. Lagi cepat, lagi laju kereta polis!', gesture: 'Tunjuk <b>1, 2, 3 atau 4 jari</b> dan tahan untuk pilih jawapan.', voice: 'Sebut jawapan dengan kuat, contoh <b>“lima belas”</b>.' },
       road: { touch: 'Sentuh lorong yang ada jawapan betul, kereta akan pecut ke sana! (Di komputer: kekunci ← → dan ↑ untuk pecut.)', gesture: 'Tunjuk <b>1, 2 atau 3 jari</b> untuk pilih lorong, dan tahan sekejap.', voice: 'Sebut jawapan dengan kuat, contoh <b>“lima belas”</b>. Kereta akan tukar lorong.' },
@@ -1396,7 +1396,7 @@ const I18N = {
     sr: 'ms-MY'
   },
   en: {
-    sub: 'Adding 1 to 12 · Roadblock Mission',
+    sub: 'Adding up to 20 · Ages 6–7',
     cs: { title: 'Police Chase', desc: 'Answer fast to chase the robber’s car. When you get close, Plusy blocks the road!', score: 'Caught', unit: 'robbers', start: 'The robber is getting away! Chase them!', go: 'CHASE!', caught: 'CAUGHT!', escaped: 'Oh no, the robber got away!', next: 'A new robber, even faster!', wrong: (k, n, a) => `Skid! ${k} + ${n} = ${a}`, titleNew: 'New record!', good: 'Super cop!', ok: 'Good job!', msg: (s, c) => `You caught ${s} robber${s === 1 ? '' : 's'} and got ${c} question${c === 1 ? '' : 's'} right.`, best: b => ` Your best: ${b}.` },
     rd: { title: 'Roadblock Rush', tag: 'NEW', desc: 'Steer your car into the lane with the right answer. Unlock the gate and vroom through!', score: 'Gates', start: 'Ready… set… GO!', go: 'GO!', wrong: (k, n, a) => `Crash! ${k} + ${n} = ${a}`, titleNew: 'New record!', good: 'Ace driver!', ok: 'Good job!', unit: 'gates', msg: s => `You opened ${s} roadblock${s === 1 ? '' : 's'}.`, best: b => ` Your best: ${b}.`, noLane: v => `No lane says ${v}. Try again!` },
     modeTitle: 'How to play', pick: 'Plus Highway', mapNote: 'Every level has a roadblock. Get 3 stars to open it, and Plusy rolls on to the next level!', gamesTitle: 'Games', tileK: 'Plus', tableWord: 'Plus',
@@ -1404,14 +1404,14 @@ const I18N = {
     modes: { touch: ['Touch', 'Tap the answer on the screen.'], gesture: ['Hand Gestures', 'Show your fingers to the camera and hold to choose.'], voice: ['Voice Commands', 'Say the answer out loud, like “fifteen”.'] },
     stats: { stars: 'Stars', mastered: 'Roadblocks open', best: 'Challenge best', carrots: 'Gold keys' },
     who: { title: 'Who’s playing?', add: 'Add player', addTitle: 'New player', editTitle: 'Edit player', edit: 'Edit', nameLbl: 'Name', namePh: 'For example: Aisyah', colorLbl: 'Colour', save: 'Save', cancel: 'Cancel', del: 'Delete player', delConfirm: n => `Delete ${n}? All of ${n}’s stars and gold keys will be lost.`, delYes: 'Yes, delete', player: i => `Player ${i}`, hello: n => `Hi ${n}! Let’s play.`, reset: 'Delete all players on this device', resetNote: 'Names and scores are saved on this device only. People who open the Plus Mania link on their own device cannot see them.', resetMsg: 'All names, stars, carrots and closet items on this device will be deleted. Plusy will start fresh.', resetYes: 'Yes, delete all', resetDone: 'All players were deleted. Plusy has started fresh.' },
-    rv: { title: 'Smart Review', btn: 'Smart review', weak: n => `${n} question${n === 1 ? '' : 's'} to practise`, none: 'No tricky questions. Great job!', empty: 'Play a quiz first. Plusy will remember the tricky questions.', titles: ['Keep practising!', 'Good job!', 'Great!', 'Excellent!'], resMsg: (s, left) => `You got ${s} out of 12. ` + (left ? `${left} question${left === 1 ? '' : 's'} still to practise.` : 'You have mastered all the tricky questions!') },
+    rv: { title: 'Smart Review', btn: 'Smart review', weak: n => `${n} question${n === 1 ? '' : 's'} to practise`, none: 'No tricky questions. Great job!', empty: 'Play a quiz first. Plusy will remember the tricky questions.', titles: ['Keep practising!', 'Good job!', 'Great!', 'Excellent!'], resMsg: (s, left) => `You got ${s} right. ` + (left ? `${left} question${left === 1 ? '' : 's'} still to practise.` : 'You have mastered all the tricky questions!') },
     carrotsEarned: n => `You earned ${n} gold key${n === 1 ? '' : 's'}!`,
-    map: { next: n => `Vroom! Roadblock open! On to Plus ${n}!`, allDone: 'Amazing! All 12 roadblocks are open. You’re the highway champion!' },
+    map: { next: n => `Vroom! Roadblock open! On to Plus ${n}!`, allDone: 'Amazing! All 10 roadblocks are open. You’re the highway champion!' },
     combo: ['GREAT!', 'SUPER!', 'AMAZING!', 'CHAMPION!'], streakSmall: n => `${n} in a row`,
     poke: ['Stop! Answer my question first!', 'Vroom, vroom!', 'I love golden keys!', 'You’re an ace driver!', 'Roadblock open!'],
     bl: { title: 'Balloon Pop', desc: 'Pop the balloon with the right answer before it floats away!', score: 'Score', lives: 'Lives', unit: 'balloons', start: 'Here come the balloons!', wrong: (k, n, a) => `Oops! ${k} + ${n} = ${a}`, miss: (k, n, a) => `It got away! ${k} + ${n} = ${a}`, noBalloon: v => `No balloon says ${v}. Try again!`, titleNew: 'New record!', good: 'Great!', ok: 'Good job!', msg: s => `You popped ${s} right balloon${s === 1 ? '' : 's'}.`, best: b => ` Your best: ${b}.` },
     closet: { title: 'Plusy’s Closet', sub: 'Answer correctly to collect gold keys. Tap an item to buy, wear or take it off.', hats: 'Hats & hair', face: 'Face', bg: 'Background', wear: 'Wear', worn: 'Wearing', need: n => `Need ${n} more`, bought: n => `${n} bought!`, short: n => `Collect ${n} more gold keys to buy this.`, info: (c, o) => `${c} gold key${c === 1 ? '' : 's'} · ${o} item${o === 1 ? '' : 's'}` },
-    chalTitle: '60-second Challenge', chalDesc: 'Mixed adding, 1 to 12. Answer as many as you can!', rec: 'Best', fist: 'Fist',
+    chalTitle: '60-second Challenge', chalDesc: 'Mixed adding, up to 20. Answer as many as you can!', rec: 'Best', fist: 'Fist',
     installCta: 'Install on phones & computers', installSub: 'Android, iPhone & iPad, Windows and Mac. Tap for the steps.',
     back: 'Menu', exit: 'Exit', read: 'Read aloud', stop: 'Stop',
     startQuiz: n => `Start Plus ${n} Quiz`, quizTitle: n => `Plus <span class="numpill">${n}</span> Quiz`, chTitle: '60-second Challenge',
@@ -1422,16 +1422,16 @@ const I18N = {
     streakMsg: (p, s) => `${p} ${s} in a row!`,
     almost: (k, n, a) => `Almost! ${k} + ${n} = ${a}`, youSaid: v => ` (you said ${v})`, noNum: 'Plusy didn’t hear a number. Please say it again.',
     resTitles: ['Let’s try again!', 'Good job!', 'Great!', 'Excellent!'],
-    res3: n => `All correct! The Plus ${n} roadblock is open!`,
-    res0: (s, n) => `You got ${s} out of 12. Review Plus ${n} first, then try again.`,
-    resMid: s => `You got ${s} out of 12. Play again to collect more stars.`,
+    res3: n => `Brilliant! The Plus ${n} roadblock is open!`,
+    res0: (s, n) => `You got ${s} out of 10. Review Plus ${n} first, then try again.`,
+    resMid: s => `You got ${s} out of 10. Play again to collect more stars.`,
     chNew: 'New record!', chGood: 'Great!', chOk: 'Good job!',
     chMsg: s => `You answered ${s} correctly in 60 seconds.`, chBest: b => ` Your best: ${b}.`, correctUnit: 'correct',
     again: 'Play again', learnNext: n => `Learn Plus ${n}`, review: n => `Review Plus ${n}`, menu: 'Main menu', notX: v => `(not ${v})`,
     hints: {
-      home: { touch: 'Tap a level on the map to start learning.', gesture: 'Show <b>1–10 fingers</b> and hold to pick a level. <b>11</b> = 1 finger on each hand. <b>12</b> = 1 finger (left) + 2 fingers (right). <b>Make a fist</b> for the Challenge.', voice: 'Say <b>“plus five”</b> to learn, <b>“quiz five”</b> for a quiz, <b>“roadblock”</b>, <b>“chase”</b> or <b>“challenge”</b>.' },
-      learn: { touch: 'Tap a row and watch the keys drop into the chests, then count them all.', gesture: 'Show fingers to pick a row (4 fingers = row 4). Row <b>11</b> = 1 + 1 fingers, row <b>12</b> = 1 + 2 fingers (two hands). <b>Make a fist</b> to start the quiz.', voice: 'Say a number, like <b>“four”</b>. Say <b>“read”</b> to hear them all, <b>“quiz”</b> to start the quiz.' },
-      quiz: { touch: 'Tap the right answer.', gesture: 'Show <b>1, 2, 3 or 4 fingers</b> and hold to choose.', voice: 'Say the answer as soon as the question appears, like <b>“thirteen”</b>. Say <b>“repeat”</b> to hear the question.' },
+      home: { touch: 'Tap a level on the map to start learning.', gesture: 'Show <b>1–10 fingers</b> and hold to pick a level. <b>Make a fist</b> for the Challenge.', voice: 'Say <b>“plus five”</b> to learn, <b>“quiz five”</b> for a quiz, <b>“roadblock”</b>, <b>“chase”</b> or <b>“challenge”</b>.' },
+      learn: { touch: 'Tap a row and watch the keys drop into the chests, then count them all.', gesture: 'Show fingers to pick a row (4 fingers = row 4). <b>Make a fist</b> to start the quiz.', voice: 'Say a number, like <b>“four”</b>. Say <b>“read”</b> to hear them all, <b>“quiz”</b> to start the quiz.' },
+      quiz: { touch: 'Tap the right answer.', gesture: 'Show <b>1, 2, 3 or 4 fingers</b> and hold to choose.', voice: 'Say the answer as soon as the question appears, like <b>“eight”</b>. Say <b>“repeat”</b> to hear the question.' },
       result: { touch: 'Choose what to do next.', gesture: 'Show the number of fingers on the button.', voice: 'Say <b>“play again”</b>, <b>“next”</b> or <b>“menu”</b>.' },
       chase: { touch: 'Tap the right answer as fast as you can. The faster you answer, the faster the police car goes!', gesture: 'Show <b>1, 2, 3 or 4 fingers</b> and hold to choose.', voice: 'Say the answer out loud, like <b>“fifteen”</b>.' },
       road: { touch: 'Tap the lane with the right answer and your car zooms there! (On a computer: ← → keys, and ↑ to boost.)', gesture: 'Show <b>1, 2 or 3 fingers</b> to pick a lane, and hold.', voice: 'Say the answer out loud, like <b>“fifteen”</b>. The car changes lanes.' },
@@ -1582,6 +1582,19 @@ const LIGHT = new Set([3, 4]);
 function setSifirColor(n) {
   app.style.setProperty('--sc', `var(--c${n})`);
   app.style.setProperty('--sc-tc', LIGHT.has(n) ? 'var(--on-light)' : 'var(--on-color)');
+}
+
+/* Questions for ages 6–7: first sums within 10, then everything up to 10 + 10 = 20.
+   Tricky facts the child got wrong come back now and then once they are warmed up. */
+function pickSum(lvl, last) {
+  const weak = weakFacts().filter(([a, b]) => last !== a + 'x' + b && a + b <= 20);
+  if (lvl >= 4 && weak.length && Math.random() < .3) return weak[Math.floor(Math.random() * Math.min(weak.length, 6))];
+  let k, n;
+  do {
+    if (lvl < 6) { n = 1 + Math.floor(Math.random() * 5); k = 1 + Math.floor(Math.random() * (10 - n)); }
+    else { n = 1 + Math.floor(Math.random() * 10); k = 1 + Math.floor(Math.random() * 10); }
+  } while (last === k + 'x' + n);
+  return [k, n];
 }
 
 /* ================= sound effects ================= */
@@ -1765,10 +1778,10 @@ function renderHome() {
   renderMap();
   $('#csBest').textContent = p.chaseBest || 0;
   $('#rdBest').textContent = p.roadBest || 0;
-  const total = Object.values(p.stars).reduce((a, b) => a + b, 0);
-  const mastered = Object.values(p.stars).filter(v => v >= 3).length;
-  $('#stStars').innerHTML = `${total}<small>/36</small>`;
-  $('#stMastered').innerHTML = `${mastered}<small>/12</small>`;
+  const total = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].reduce((a, n) => a + (p.stars[n] || 0), 0);
+  const mastered = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].filter(n => (p.stars[n] || 0) >= 3).length;
+  $('#stStars').innerHTML = `${total}<small>/30</small>`;
+  $('#stMastered').innerHTML = `${mastered}<small>/10</small>`;
   $('#stCarrots').textContent = p.carrots;
   $('#stBest').textContent = p.best || 0;
   $('#bestScore').textContent = p.best || 0;
@@ -1797,7 +1810,7 @@ function openLearn(n) {
   $('#learnN').textContent = n;
   relabelLearn();
   const rows = $('#rows'); rows.innerHTML = '';
-  for (let k = 1; k <= 12; k++) {
+  for (let k = 1; k <= 10; k++) {
     const li = document.createElement('li');
     const b = document.createElement('button');
     b.className = 'row'; b.dataset.finger = k; b.dataset.k = k;
@@ -1825,7 +1838,7 @@ function toggleRecite() {
   const tok = ++reciteTok; let k = 1;
   const step = () => {
     if (tok !== reciteTok || S.screen !== 'learn') return;
-    if (k > 12) { stopRecite(); return; }
+    if (k > 10) { stopRecite(); return; }
     const kk = k++;
     selectRow(kk, false);
     say(L().tts.recite(kk, S.sifir), () => setTimeout(step, 250));
@@ -1836,9 +1849,9 @@ function stopRecite() { S.reciting = false; reciteTok++; $('#reciteLbl').textCon
 
 /* ---------- quiz ---------- */
 function makeOptions(k, n) {
-  /* Wrong answers a child really gives: one or two off (miscounting), ten off, or taking away instead of adding. */
+  /* Wrong answers a young child really gives: one, two or three off (miscounting), or taking away instead of adding. */
   const ans = k + n, set = new Set([ans]);
-  const c = shuffle([ans + 1, ans - 1, ans + 2, ans - 2, ans + 1, ans - 1, ans + 10, ans - 10, Math.abs(k - n), ans + 3]
+  const c = shuffle([ans + 1, ans - 1, ans + 2, ans - 2, ans + 1, ans - 1, ans + 3, ans - 3, Math.abs(k - n)]
     .filter(v => v > 0 && v !== ans));
   for (const v of c) { if (set.size >= 4) break; set.add(v); }
   let extra = 3; while (set.size < 4) set.add(ans + extra++);
@@ -1857,7 +1870,7 @@ const newQ = (kind, extra) => Object.assign({ kind, i: -1, score: 0, streak: 0, 
 function startQuiz(n) {
   if (Q) { stopTimer(); clearTimeout(Q.timer); }
   S.sifir = n; setSifirColor(n);
-  Q = newQ('sifir', { n, order: shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]), total: 12 });
+  Q = newQ('sifir', { n, order: shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), total: 10 });
   renderQuizTitle(); resetQuizChrome(false);
   show('quiz'); nextQ();
 }
@@ -1885,9 +1898,7 @@ function nextQ() {
   else if (Q.kind === 'review') { [k, n] = Q.list[Q.i]; setSifirColor(n); }
   else {
     /* The challenge brings back tricky questions about a third of the time. */
-    const weak = weakFacts().filter(([a, b]) => b >= 2 && Q.last !== a + 'x' + b);
-    if (weak.length && Math.random() < .35) [k, n] = weak[Math.floor(Math.random() * Math.min(weak.length, 6))];
-    else do { n = 2 + Math.floor(Math.random() * 11); k = 1 + Math.floor(Math.random() * 12); } while (Q.last === k + 'x' + n);
+    [k, n] = pickSum(Q.score, Q.last);
     Q.last = k + 'x' + n; setSifirColor(n);
   }
   Object.assign(Q, { k, n2: n, ans: k + n, answered: false, opts: makeOptions(k, n) });
@@ -1982,10 +1993,10 @@ function finish() {
   if (!Q) return;
   stopTimer(); clearTimeout(Q.timer);
   const p = P(), kind = Q.kind, sc = Q.score;
-  const R = { kind, ch: kind === 'ch', sc, correct: Q.correct, n: Q.n, wrong: Q.wrong.slice(), stars: 0, best: false, carrots: Q.earned };
+  const R = { kind, ch: kind === 'ch', sc, total: Q.total, correct: Q.correct, n: Q.n, wrong: Q.wrong.slice(), stars: 0, best: false, carrots: Q.earned };
   let bonus = 0;
   if (kind === 'sifir') {
-    R.stars = sc >= 12 ? 3 : sc >= 10 ? 2 : sc >= 6 ? 1 : 0;
+    R.stars = sc >= 9 ? 3 : sc >= 7 ? 2 : sc >= 5 ? 1 : 0;
     const before = p.stars[Q.n] || 0;
     if (R.stars > before) p.stars[Q.n] = R.stars;
     if (R.stars === 3 && before < 3) bonus = 10;
@@ -1999,7 +2010,7 @@ function finish() {
     R.best = sc > (p.roadBest || 0) && sc > 0;
     if (R.best) { p.roadBest = sc; bonus = 5; }
   } else {
-    R.stars = sc >= 12 ? 3 : sc >= 10 ? 2 : sc >= 6 ? 1 : 0;
+    R.stars = sc >= 9 ? 3 : sc >= 7 ? 2 : sc >= 5 ? 1 : 0;
     if (sc === Q.total) bonus = 5;
   }
   p.carrots += bonus; R.carrots += bonus;
@@ -2035,12 +2046,12 @@ function renderResult() {
   $('#rTitle').textContent = title;
   $('#rMsg').textContent = msg;
   const rs = $('#rStars'); rs.hidden = R.kind !== 'sifir'; rs.innerHTML = starsHTML(R.stars);
-  $('#rScore').innerHTML = R.ch ? `${R.sc}<small> ${T.correctUnit}</small>` : R.kind === 'road' ? `${R.sc}<small> ${T.rd.unit}</small>` : R.kind === 'chase' ? `${R.sc}<small> ${T.cs.unit}</small>` : `${R.sc}<small>/12</small>`;
+  $('#rScore').innerHTML = R.ch ? `${R.sc}<small> ${T.correctUnit}</small>` : R.kind === 'road' ? `${R.sc}<small> ${T.rd.unit}</small>` : R.kind === 'chase' ? `${R.sc}<small> ${T.cs.unit}</small>` : `${R.sc}<small>/${R.total || 10}</small>`;
   const re = $('#rEarned'); re.hidden = !R.carrots; re.innerHTML = CARROT + esc(T.carrotsEarned(R.carrots));
   const rv = $('#rReview');
   rv.innerHTML = R.wrong.slice(0, 8).map(w => `<li>${w.k} + ${w.n} = ${w.ans}${w.got != null ? ` <span>${T.notX(w.got)}</span>` : ''}</li>`).join('');
   rv.hidden = !R.wrong.length;
-  const nx = R.n % 12 + 1, weak = weakFacts().length;
+  const nx = R.n % 10 + 1, weak = weakFacts().length;
   const acts = R.kind === 'ch' ? [['again', T.again, startChallenge], ['menu', T.menu, goHome]]
     : R.kind === 'review' ? [['again', T.again, startReview], ['menu', T.menu, goHome]]
     : R.kind === 'chase' ? [['again', T.again, startChase], ['menu', T.menu, goHome]]
@@ -2398,13 +2409,13 @@ function voiceAct(alts, how) {
       if (has('road')) return startRoad();
       if (has('challenge')) return startChallenge();
       if (has('chase')) return startChase();
-      if (nums.length && nums[0] >= 1 && nums[0] <= 12) { sfx('tap'); return has('quiz') ? startQuiz(nums[0]) : openLearn(nums[0]); }
+      if (nums.length && nums[0] >= 1 && nums[0] <= 10) { sfx('tap'); return has('quiz') ? startQuiz(nums[0]) : openLearn(nums[0]); }
       break;
     case 'learn':
       if (has('home')) return goHome();
       if (has('start')) return startQuiz(S.sifir);
       if (has('read')) return toggleRecite();
-      if (nums.length && nums[0] >= 1 && nums[0] <= 12) { if (S.reciting) stopRecite(); return selectRow(nums[0]); }
+      if (nums.length && nums[0] >= 1 && nums[0] <= 10) { if (S.reciting) stopRecite(); return selectRow(nums[0]); }
       break;
     case 'quiz':
       if (has('stop')) return goHome();
@@ -2772,13 +2783,13 @@ function askMotion() {
   if (D && typeof D.requestPermission === 'function') D.requestPermission().catch(() => {});
 }
 
-/* ================= adventure map: 12 doors on Plus Island ================= */
+/* ================= adventure map: 10 roadblocks on Plus Highway ================= */
 const MAP = { el: $('#map'), svg: $('#mapPath'), me: $('#mapMe'), pts: [], hopping: false, R: 36, size: 52 };
-const mapGoal = p => { for (let n = 1; n <= 12; n++) if ((p.stars[n] || 0) < 3) return n; return 12; };
+const mapGoal = p => { for (let n = 1; n <= 10; n++) if ((p.stars[n] || 0) < 3) return n; return 10; };
 function renderMap() {
   const T = L(), p = P(), box = $('#tiles'), goal = mapGoal(p);
   box.innerHTML = '';
-  for (let n = 1; n <= 12; n++) {
+  for (let n = 1; n <= 10; n++) {
     const st = p.stars[n] || 0, b = document.createElement('button');
     b.className = 'node' + (LIGHT.has(n) ? ' lt' : '') + (st >= 3 ? ' done' : '') + (n === goal && st < 3 ? ' goal' : '');
     b.dataset.finger = n; b.dataset.n = n;
@@ -2824,14 +2835,14 @@ const mePos = n => { const [x, y] = MAP.pts[n - 1]; return [x - MAP.size / 2, y 
 function setMe(n) { if (!MAP.pts.length) return; const [x, y] = mePos(n); MAP.me.style.transform = `translate(${x}px,${y}px)`; }
 function layoutMap() {
   const el = MAP.el, W = el.clientWidth; if (!W) return;
-  const small = W < 480, cols = W >= 700 ? 6 : small ? 3 : 4, rows = Math.ceil(12 / cols);
+  const small = W < 480, cols = W >= 700 ? 5 : small ? 3 : 4, rows = Math.ceil(10 / cols);
   const nd = small ? 60 : 72; MAP.R = nd / 2; MAP.size = small ? 46 : 54;
   el.style.setProperty('--nd', nd + 'px'); el.style.setProperty('--me', MAP.size + 'px');
   const padX = small ? 52 : 74, top = small ? 92 : 100, rowH = small ? 148 : 160;
   const H = top + (rows - 1) * rowH + (small ? 72 : 78), bw = (el.offsetWidth - el.clientWidth) / 2;
   el.style.height = (H + 2 * bw) + 'px';
   const pts = [];
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < 10; i++) {
     const r = Math.floor(i / cols), c0 = i % cols, c = r % 2 ? cols - 1 - c0 : c0;
     pts.push([Math.round(padX + c * (W - 2 * padX) / (cols - 1)), Math.round(top + r * rowH + (c % 2 ? 14 : -6))]);
   }
@@ -2839,8 +2850,8 @@ function layoutMap() {
   $$('#tiles .node').forEach((b, i) => { b.style.left = pts[i][0] + 'px'; b.style.top = pts[i][1] + 'px'; });
   const ss = segs(pts), p = P(), goal = mapGoal(p);
   MAP.svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
-  MAP.svg.innerHTML = decor(W, H, pts, ss) + `<path class="p-edge" d="${pathD(pts, ss, 11)}"/><path class="p-base" d="${pathD(pts, ss, 11)}"/>` +
-    (goal > 1 ? `<path class="p-done" d="${pathD(pts, ss, goal - 1)}"/>` : '') + `<path class="p-dash" d="${pathD(pts, ss, 11)}"/>`;
+  MAP.svg.innerHTML = decor(W, H, pts, ss) + `<path class="p-edge" d="${pathD(pts, ss, pts.length - 1)}"/><path class="p-base" d="${pathD(pts, ss, pts.length - 1)}"/>` +
+    (goal > 1 ? `<path class="p-done" d="${pathD(pts, ss, goal - 1)}"/>` : '') + `<path class="p-dash" d="${pathD(pts, ss, pts.length - 1)}"/>`;
   if (MAP.hopping) return;
   if (!p.mapPos || p.mapPos > goal || RM.matches) { if (p.mapPos !== goal) { p.mapPos = goal; save(); } setMe(goal); }
   else if (p.mapPos < goal) { setMe(p.mapPos); hopTo(p.mapPos, goal); }
@@ -2868,7 +2879,7 @@ async function hopTo(from, to) {
   }
   MAP.hopping = false;
   const p = P(); p.mapPos = to; save(); setMe(to);
-  const all = Object.values(p.stars).filter(v => v >= 3).length >= 12;
+  const all = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].every(n => (p.stars[n] || 0) >= 3);
   const msg = all ? L().map.allDone : L().map.next(to);
   const node = $(`#tiles .node[data-n="${to}"]`);
   if (node) burstFrom(node, 60, 1);
@@ -2882,7 +2893,8 @@ else addEventListener('resize', layoutMap);
 let countTok = 0;
 function fillBaskets(k, n) {
   const box = $('#dots'), tot = k + n;
-  const cs = tot <= 8 ? 46 : tot <= 14 ? 40 : 34, cols = c => c <= 4 ? c : c <= 6 ? 3 : 4;
+  /* rows of five, like the ten frames used in preschool and Year 1 */
+  const narrow = innerWidth < 520, cs = narrow ? (tot <= 10 ? 32 : 26) : tot <= 8 ? 46 : tot <= 14 ? 40 : 34, cols = c => Math.min(c, 5);
   box.innerHTML = ''; box.style.setProperty('--cs', cs + 'px');
   const step = Math.min(.16, 2.4 / tot), lands = [];
   [k, n].forEach((c, g) => {
@@ -2929,7 +2941,7 @@ function csGo(text) { const g = $('#csGo'); g.innerHTML = `<span>${esc(text)}</s
 function csStop() { CS.on = false; cancelAnimationFrame(CS.raf); CS.phase = 'idle'; }
 function csNewThief(first) {
   CS.gap = 55; CS.flee = 0; CS.phase = 'chase';
-  CS.drift = 2.6 + Q.score * .9;
+  CS.drift = 1.6 + Q.score * .5;
   const th = $('#csThief'); th.classList.remove('caught', 'flee');
   const pl = $('#csPlusy'); pl.classList.remove('drop');
   csGo(L().cs.go); sfx('siren');
@@ -2948,10 +2960,7 @@ function startChase() {
 }
 function csNext() {
   if (!Q || Q.kind !== 'chase' || !CS.on || CS.phase !== 'chase') return;
-  const lvl = Q.correct, weak = weakFacts().filter(([a, b]) => Q.last !== a + 'x' + b);
-  let k, n;
-  if (lvl >= 4 && weak.length && Math.random() < .3) [k, n] = weak[Math.floor(Math.random() * Math.min(weak.length, 6))];
-  else { const maxN = lvl < 5 ? 5 : lvl < 12 ? 9 : 12, maxK = lvl < 5 ? 9 : 12; do { n = 1 + Math.floor(Math.random() * maxN); k = 1 + Math.floor(Math.random() * maxK); } while (Q.last === k + 'x' + n); }
+  const [k, n] = pickSum(Q.correct, Q.last);
   Q.last = k + 'x' + n; Q.i++;
   Object.assign(Q, { k, n2: n, ans: k + n, answered: false, opts: makeOptions(k, n) });
   CS.t0 = performance.now();
@@ -2974,8 +2983,8 @@ function csAnswer(v, btn) {
   $('#csSlot').textContent = Q.ans; $('#csSlot').classList.add('ok');
   noteFact(Q.k, Q.n2, ok);
   if (ok) {
-    const secs = (performance.now() - CS.t0) / 1000, fast = secs < 2.5;
-    CS.gap -= 15 + (fast ? 9 : secs < 4 ? 4 : 0);
+    const secs = (performance.now() - CS.t0) / 1000, fast = secs < 4;
+    CS.gap -= 16 + (fast ? 8 : secs < 7 ? 4 : 0);
     Q.correct++; Q.streak++; Q.earned++; P().carrots++;
     const earned = Q.earned;
     flyCarrot(btn || $('#csSlot'), $('#csCarrots'), () => { $('#csCarrotsN').textContent = earned; });
@@ -2985,7 +2994,7 @@ function csAnswer(v, btn) {
     csSay(combo ? '' : T.praise[Math.floor(Math.random() * T.praise.length)], 'ok');
   } else {
     if (btn) btn.classList.add('is-wrong');
-    CS.gap += 12; Q.streak = 0;
+    CS.gap += 8; Q.streak = 0;
     Q.wrong.push({ k: Q.k, n: Q.n2, ans: Q.ans, got: v });
     pol.classList.remove('spin'); void pol.offsetWidth; pol.classList.add('spin');
     sfx('no'); csSay(T.cs.wrong(Q.k, Q.n2, Q.ans), 'no');
@@ -3070,7 +3079,7 @@ function startRoad() {
   Q = newQ('road', { lives: 3 });
   show('road');
   RD.lane = 1; RD.y = -400; RD.boost = false; rdLayout();
-  RD.base = $('#rdTrack').clientHeight / 5.2; RD.speed = RD.base;
+  RD.base = $('#rdTrack').clientHeight / 7.5; RD.speed = RD.base;
   $('#rdScore').textContent = 0; $('#rdCarrotsN').textContent = 0; $('#rdSpeed').textContent = rdKmh();
   $('#rdA').textContent = '?'; $('#rdB').textContent = '?'; $('#rdSlot').textContent = '?'; $('#rdSlot').className = 'slot';
   rdGates().forEach(g => { g.className = 'rd-gate'; g.querySelector('.rd-lock').textContent = '?'; });
@@ -3080,17 +3089,7 @@ function startRoad() {
   say(L().rd.start); sfx('vroom');
   Q.timer = setTimeout(rdRound, 900);
 }
-function rdQuestion() {
-  /* Gentle start: small numbers first, then the full 1–12 range. Tricky questions come back now and then. */
-  const lvl = Q.score, weak = weakFacts().filter(([a, b]) => Q.last !== a + 'x' + b);
-  let k, n;
-  if (lvl >= 4 && weak.length && Math.random() < .3) [k, n] = weak[Math.floor(Math.random() * Math.min(weak.length, 6))];
-  else {
-    const maxN = lvl < 5 ? 5 : lvl < 12 ? 9 : 12, maxK = lvl < 5 ? 9 : 12;
-    do { n = 1 + Math.floor(Math.random() * maxN); k = 1 + Math.floor(Math.random() * maxK); } while (Q.last === k + 'x' + n);
-  }
-  return [k, n];
-}
+function rdQuestion() { return pickSum(Q.score, Q.last); }
 function rdRound() {
   if (!Q || Q.kind !== 'road' || !RD.on) return;
   const [k, n] = rdQuestion(), ans = k + n;
@@ -3141,7 +3140,7 @@ function rdResolve() {
     const combo = comboFx(Q.streak);
     rdSay(combo ? '' : T.praise[Math.floor(Math.random() * T.praise.length)], 'ok');
     setMood(m, 'happy');
-    RD.speed = Math.min(RD.base * 2.2, RD.speed * 1.06); $('#rdSpeed').textContent = rdKmh();
+    RD.speed = Math.min(RD.base * 1.8, RD.speed * 1.04); $('#rdSpeed').textContent = rdKmh();
     Q.timer = setTimeout(rdRound, 900);
   } else {
     RD.phase = 'crash'; RD.boost = false;
