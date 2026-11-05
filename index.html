@@ -817,6 +817,52 @@ body::after{display:none}
 @keyframes goPop{0%{transform:scale(.3);opacity:0}40%{transform:scale(1.15);opacity:1}100%{transform:scale(1);opacity:0}}
 .rd-speed{gap:4px}
 @media (max-width:520px){ .rd-track{width:90%} .rd-lock{font-size:28px} }
+
+/* ---------- Police Chase ---------- */
+.cs-card{border-left-color:#2563EB}
+.cs-card .bl-ic{background:color-mix(in srgb,#2563EB 14%,var(--card))}
+.cs-card .bl-ic svg{width:52px;height:26px;animation:idle .4s ease-in-out infinite alternate}
+.cs-card .sl.r{animation:blinkR .5s steps(1) infinite}.cs-card .sl.b{animation:blinkB .5s steps(1) infinite}
+.cs-meter{display:flex;align-items:center;gap:12px;font:400 20px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.cs-mtrack{position:relative;flex:1;height:16px;border-radius:999px;background:var(--card-2);border:2px solid var(--line)}
+.cs-mfill{position:absolute;top:0;bottom:0;border-radius:999px;background:linear-gradient(90deg,#2563EB,#FF3B3B)}
+.cs-mpol,.cs-mthf{position:absolute;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 4px rgba(0,0,0,.3)}
+.cs-mpol{background:#2563EB}.cs-mthf{background:#4B2E83}
+.cs-meter b.near{color:#E5364F;animation:bump .5s ease infinite}
+.cs-scene{position:relative;height:clamp(250px,40vh,360px);border-radius:28px;overflow:hidden;border:2px solid var(--line);
+  background:linear-gradient(180deg,#7CC8F8,#BFE6FF 55%,#E9F6FF);box-shadow:0 10px 24px -18px var(--lift);--o1:0px;--o2:0px}
+:root[data-theme="dark"] .cs-scene{background:linear-gradient(180deg,#0B1026,#24306A 60%,#3C2E6B)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .cs-scene{background:linear-gradient(180deg,#0B1026,#24306A 60%,#3C2E6B)} }
+.cs-city{position:absolute;left:0;right:0;bottom:40%;height:46%;opacity:.9;
+  background:linear-gradient(180deg,transparent 0 35%,#5B6B8C 35%) var(--o1) 0/70px 100% repeat-x,
+  linear-gradient(180deg,transparent 0 10%,#45526F 10%) calc(var(--o1) + 30px) 0/110px 100% repeat-x;
+  -webkit-mask:linear-gradient(90deg,#000 0 55%,transparent 55%) 0 0/70px 100% repeat-x}
+.cs-city::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 0 20%,#38445E 20%) calc(var(--o1) * 1.4) 0/150px 100% repeat-x;-webkit-mask:linear-gradient(90deg,#000 0 40%,transparent 40%) calc(var(--o1) * 1.4) 0/150px 100% repeat-x}
+.cs-road{position:absolute;left:0;right:0;bottom:0;height:40%;background:
+  linear-gradient(90deg,#FFD43B 0 46px,transparent 46px 92px) var(--o2) 55%/92px 6px repeat-x,
+  repeating-linear-gradient(90deg,#E5364F 0 24px,#fff 24px 48px) var(--o2) 0/100% 9px repeat-x,#3D434F}
+.cs-car{position:absolute;left:0;bottom:12%;width:clamp(118px,21vw,176px);z-index:3;will-change:transform}
+.cs-car svg{display:block;width:100%;height:auto;filter:drop-shadow(0 8px 5px rgba(0,0,0,.35));animation:bounceCar .28s ease-in-out infinite alternate}
+@keyframes bounceCar{to{transform:translateY(-2px)}}
+.cs-police{z-index:4}
+.cs-police .sl.r{animation:blinkR .4s steps(1) infinite}.cs-police .sl.b{animation:blinkB .4s steps(1) infinite}
+@keyframes blinkR{50%{fill:#5A1010}}@keyframes blinkB{0%{fill:#10204A}50%{fill:#3B82F6}}
+.cs-police.boost::before{content:"";position:absolute;right:96%;bottom:22%;width:56%;height:22%;border-radius:50% 0 0 50%;background:linear-gradient(270deg,#FFD43B,#FF6A00 45%,transparent);filter:blur(1px);animation:flick .08s linear infinite alternate}
+@keyframes flick{to{opacity:.6;transform:scaleX(.8)}}
+.cs-police.spin svg{animation:carSpin .7s ease}
+@keyframes carSpin{0%{transform:none}30%{transform:rotate(-18deg) translateY(-6px)}60%{transform:rotate(12deg)}100%{transform:none}}
+.cs-thief::before{content:"";position:absolute;right:98%;bottom:18%;width:40px;height:22px;border-radius:50%;background:radial-gradient(circle,rgba(160,170,190,.8),transparent 70%);animation:puff .5s linear infinite}
+@keyframes puff{from{transform:translateX(0) scale(.6);opacity:.9}to{transform:translateX(-26px) scale(1.4);opacity:0}}
+.cs-thief.caught svg{animation:carSpin .6s ease}
+.cs-thief.flee{transition:transform .8s ease-in}
+.cs-plusy{position:absolute;left:0;bottom:6%;width:clamp(96px,17vw,150px);z-index:2;transform:translateY(-140%);opacity:0;pointer-events:none}
+.cs-plusy.drop{opacity:1;animation:plusyDrop .55s cubic-bezier(.5,0,.6,1.5) forwards}
+@keyframes plusyDrop{from{transform:translateY(-140%)}to{transform:translateY(0)}}
+.cs-q{font-size:clamp(28px,6vw,46px)}
+.cs-msg{top:calc(30px + clamp(28px,6vw,46px) + 10px)}
+.cs-opts{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px}
+.cs-opts .opt{font-size:clamp(30px,7vw,48px);padding:16px 4px 14px}
+@media (max-width:560px){ .cs-opts .opt{padding:12px 2px 10px} .cs-meter{font-size:16px} }
 </style>
 </head>
 <body>
@@ -907,11 +953,11 @@ body::after{display:none}
         <span class="rec"><span data-i18n="rec">Rekod</span><b id="bestScore">0</b></span>
         <span class="d" data-i18n="chalDesc"></span>
       </button>
-      <button class="bl-card" id="btnBalloon">
-        <span class="bl-ic" id="blIcon"></span>
-        <strong data-i18n="bl.title">Pop Belon</strong>
-        <span class="rec"><span data-i18n="rec">Rekod</span><b id="blBest">0</b></span>
-        <span class="d" data-i18n="bl.desc"></span>
+      <button class="bl-card cs-card" id="btnChase">
+        <span class="bl-ic" id="csIcon"></span>
+        <strong data-i18n="cs.title">Kejar Pencuri</strong>
+        <span class="rec"><span data-i18n="rec">Rekod</span><b id="csBest">0</b></span>
+        <span class="d" data-i18n="cs.desc"></span>
       </button>
       </div>
 
@@ -976,27 +1022,32 @@ body::after{display:none}
       <div class="opts" id="opts"></div>
     </section>
 
-    <!-- BALLOON POP -->
-    <section class="screen" id="scrBalloon" hidden>
+    <!-- POLICE CHASE -->
+    <section class="screen" id="scrChase" hidden>
       <div class="topline">
-        <button class="btn ghost" id="blBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span class="lbl" data-i18n="exit">Keluar</span></button>
-        <h2 data-i18n="bl.title">Pop Belon</h2>
+        <button class="btn ghost" id="csBack"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span class="lbl" data-i18n="exit">Keluar</span></button>
+        <h2 data-i18n="cs.title">Kejar Pencuri</h2>
         <span class="grow"></span>
         <div class="qmeta">
-          <span class="chip lives" id="blLives"></span>
-          <span class="chip"><span data-i18n="bl.score">Skor</span> <b id="blScore">0</b></span>
-          <span class="chip streak" id="blStreak" hidden><span class="flame"></span><b id="blStreakN">0</b><span data-i18n="inARow">berturut-turut</span></span>
-          <span class="chip carrot" id="blCarrots"><span class="ci"></span><b id="blCarrotsN">0</b></span>
+          <span class="chip lives" id="csLives"></span>
+          <span class="chip"><span data-i18n="cs.score">Ditangkap</span> <b id="csScore">0</b></span>
+          <span class="chip streak" id="csStreak" hidden><span class="flame"></span><b id="csStreakN">0</b><span data-i18n="inARow">berturut-turut</span></span>
+          <span class="chip carrot" id="csCarrots"><span class="ci"></span><b id="csCarrotsN">0</b></span>
         </div>
       </div>
-      <div class="hint" data-hint="balloon"></div>
-      <div class="sky" id="sky">
-        <span class="cloud c1"></span><span class="cloud c2"></span><span class="cloud c3"></span>
-        <div class="bl-q" aria-live="polite"><span id="blA">4</span><span class="x">+</span><span id="blB">3</span><span class="x">=</span><span class="slot" id="blSlot">?</span></div>
-        <p class="bl-msg" id="blMsg" aria-live="polite"></p>
-        <div class="bl-field" id="blField"></div>
-        <div class="bl-me"><div class="mascot head" id="blMascot"></div></div>
+      <div class="hint" data-hint="chase"></div>
+      <div class="cs-meter" aria-hidden="true"><span class="cs-mtrack"><span class="cs-mfill" id="csFill"></span><span class="cs-mpol" id="csMPol"></span><span class="cs-mthf" id="csMThf"></span></span><b id="csDist">55 m</b></div>
+      <div class="cs-scene" id="csScene">
+        <div class="cs-city"></div>
+        <div class="cs-road"></div>
+        <div class="cs-plusy" id="csPlusy"><div class="mascot" id="csMascot"></div></div>
+        <div class="cs-car cs-thief" id="csThief"></div>
+        <div class="cs-car cs-police" id="csPolice"></div>
+        <div class="rd-q cs-q" aria-live="polite"><span id="csA">?</span><span class="x">+</span><span id="csB">?</span><span class="x">=</span><span class="slot" id="csSlot">?</span></div>
+        <p class="bl-msg rd-msg cs-msg" id="csMsg" aria-live="polite"></p>
+        <div class="rd-go" id="csGo" aria-hidden="true"></div>
       </div>
+      <div class="opts cs-opts" id="csOpts"></div>
     </section>
 
     <!-- ROADBLOCK RUSH -->
@@ -1154,13 +1205,13 @@ const save = () => { try { localStorage.setItem(KEY, JSON.stringify(store)); } c
 if (store.theme === 'light' || store.theme === 'dark') document.documentElement.dataset.theme = store.theme;
 /* Players: each child on a shared device keeps their own stars, carrots, closet and question history. */
 function newProfile(name, color) {
-  return { id: 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), name: name || '', color: color || 9, stars: {}, best: 0, facts: {}, carrots: 0, owned: [], wear: { hat: '', face: '', bg: '' }, balloonBest: 0, roadBest: 0, mapPos: 0 };
+  return { id: 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), name: name || '', color: color || 9, stars: {}, best: 0, facts: {}, carrots: 0, owned: [], wear: { hat: '', face: '', bg: '' }, balloonBest: 0, roadBest: 0, chaseBest: 0, mapPos: 0 };
 }
 if (!Array.isArray(store.profiles) || !store.profiles.length) {
   const first = newProfile('', 9); first.stars = store.stars || {}; first.best = store.best || 0;
   store.profiles = [first]; store.current = first.id;
 }
-store.profiles.forEach(p => { p.stars = p.stars || {}; p.facts = p.facts || {}; p.owned = p.owned || []; p.carrots = p.carrots || 0; p.best = p.best || 0; p.balloonBest = p.balloonBest || 0; p.roadBest = p.roadBest || 0; p.mapPos = p.mapPos || 0; p.wear = Object.assign({ hat: '', face: '', bg: '' }, p.wear); });
+store.profiles.forEach(p => { p.stars = p.stars || {}; p.facts = p.facts || {}; p.owned = p.owned || []; p.carrots = p.carrots || 0; p.best = p.best || 0; p.balloonBest = p.balloonBest || 0; p.roadBest = p.roadBest || 0; p.chaseBest = p.chaseBest || 0; p.mapPos = p.mapPos || 0; p.wear = Object.assign({ hat: '', face: '', bg: '' }, p.wear); });
 delete store.stars; delete store.best;
 const P = () => store.profiles.find(p => p.id === store.current) || store.profiles[0];
 const initial = p => { const n = (p.name || '').trim(); return n ? [...n][0].toUpperCase() : String(store.profiles.indexOf(p) + 1); };
@@ -1252,6 +1303,7 @@ function parseNumber(text) {
 const I18N = {
   ms: {
     sub: 'Tambah 1 hingga 12 · Misi Sekatan Jalan',
+    cs: { title: 'Kejar Pencuri', desc: 'Jawab pantas untuk kejar kereta pencuri. Bila dekat, Plusy sekat jalan dan tangkap dia!', score: 'Ditangkap', unit: 'pencuri', start: 'Pencuri lari! Kejar dia!', go: 'KEJAR!', caught: 'DITANGKAP!', escaped: 'Alamak, pencuri terlepas!', next: 'Pencuri baharu, lebih laju!', wrong: (k, n, a) => `Tergelincir! ${k} + ${n} = ${a}`, titleNew: 'Rekod baharu!', good: 'Polis hebat!', ok: 'Bagus!', msg: (s, c) => `Kamu tangkap ${s} pencuri dan jawab ${c} soalan betul.`, best: b => ` Rekod terbaik kamu: ${b}.` },
     rd: { title: 'Sekatan Jalan', tag: 'BAHARU', desc: 'Pandu kereta ke lorong yang ada jawapan betul. Kunci terbuka, sekatan dibuka, vroom!', score: 'Sekatan', start: 'Sedia… mula… PECUT!', go: 'PECUT!', wrong: (k, n, a) => `Bum! ${k} + ${n} = ${a}`, titleNew: 'Rekod baharu!', good: 'Pemandu hebat!', ok: 'Bagus!', unit: 'sekatan', msg: s => `Kamu buka ${s} sekatan jalan.`, best: b => ` Rekod terbaik kamu: ${b}.`, noLane: v => `Tiada lorong ${v}. Cuba lagi!` },
     modeTitle: 'Cara main', pick: 'Lebuhraya Tambah', mapNote: 'Setiap tahap ada sekatan jalan. Dapatkan 3 bintang untuk membukanya, dan Plusy akan bergerak ke tahap seterusnya!', gamesTitle: 'Permainan', tileK: 'Tambah', tableWord: 'Tambah',
     seg: { touch: 'Sentuh', gesture: 'Tangan', voice: 'Suara' },
@@ -1283,10 +1335,11 @@ const I18N = {
     chMsg: s => `Kamu jawab ${s} soalan betul dalam 60 saat.`, chBest: b => ` Rekod terbaik kamu: ${b}.`, correctUnit: 'betul',
     again: 'Main lagi', learnNext: n => `Belajar Tambah ${n}`, review: n => `Ulang kaji Tambah ${n}`, menu: 'Menu utama', notX: v => `(bukan ${v})`,
     hints: {
-      home: { touch: 'Sentuh satu tahap di peta untuk mula belajar.', gesture: 'Tunjuk <b>1–10 jari</b> dan tahan untuk pilih tahap. <b>11</b> = 1 jari setiap tangan. <b>12</b> = 1 jari (kiri) + 2 jari (kanan). <b>Genggam tangan</b> untuk Cabaran.', voice: 'Sebut <b>“tambah lima”</b> untuk belajar, <b>“kuiz lima”</b> untuk kuiz, <b>“sekatan”</b>, <b>“cabaran”</b> atau <b>“belon”</b>.' },
+      home: { touch: 'Sentuh satu tahap di peta untuk mula belajar.', gesture: 'Tunjuk <b>1–10 jari</b> dan tahan untuk pilih tahap. <b>11</b> = 1 jari setiap tangan. <b>12</b> = 1 jari (kiri) + 2 jari (kanan). <b>Genggam tangan</b> untuk Cabaran.', voice: 'Sebut <b>“tambah lima”</b> untuk belajar, <b>“kuiz lima”</b> untuk kuiz, <b>“sekatan”</b>, <b>“kejar”</b> atau <b>“cabaran”</b>.' },
       learn: { touch: 'Sentuh satu baris dan lihat kunci jatuh ke dalam peti, kemudian kira semuanya.', gesture: 'Tunjuk jari untuk pilih baris (4 jari = baris 4). Baris <b>11</b> = 1 + 1 jari, baris <b>12</b> = 1 + 2 jari (dua tangan). <b>Genggam tangan</b> untuk mula kuiz.', voice: 'Sebut nombor, contoh <b>“empat”</b>. Sebut <b>“baca”</b> untuk dengar semua, <b>“kuiz”</b> untuk mula kuiz.' },
       quiz: { touch: 'Sentuh jawapan yang betul.', gesture: 'Tunjuk <b>1, 2, 3 atau 4 jari</b> dan tahan untuk pilih jawapan.', voice: 'Terus sebut jawapan sebaik soalan keluar, contoh <b>“tiga belas”</b>. Sebut <b>“ulang”</b> untuk dengar soalan.' },
       result: { touch: 'Pilih apa yang kamu mahu buat seterusnya.', gesture: 'Tunjuk jari ikut nombor pada butang.', voice: 'Sebut <b>“main lagi”</b>, <b>“seterusnya”</b> atau <b>“menu”</b>.' },
+      chase: { touch: 'Sentuh jawapan betul secepat mungkin. Lagi cepat, lagi laju kereta polis!', gesture: 'Tunjuk <b>1, 2, 3 atau 4 jari</b> dan tahan untuk pilih jawapan.', voice: 'Sebut jawapan dengan kuat, contoh <b>“lima belas”</b>.' },
       road: { touch: 'Sentuh lorong yang ada jawapan betul, kereta akan pecut ke sana! (Di komputer: kekunci ← → dan ↑ untuk pecut.)', gesture: 'Tunjuk <b>1, 2 atau 3 jari</b> untuk pilih lorong, dan tahan sekejap.', voice: 'Sebut jawapan dengan kuat, contoh <b>“lima belas”</b>. Kereta akan tukar lorong.' },
       balloon: { touch: 'Sentuh belon yang ada jawapan betul sebelum ia terbang!', gesture: 'Tunjuk <b>1–4 jari</b> ikut nombor pada belon, dan tahan sekejap.', voice: 'Sebut jawapan dengan kuat, contoh <b>“lima belas”</b>.' }
     },
@@ -1344,6 +1397,7 @@ const I18N = {
   },
   en: {
     sub: 'Adding 1 to 12 · Roadblock Mission',
+    cs: { title: 'Police Chase', desc: 'Answer fast to chase the robber’s car. When you get close, Plusy blocks the road!', score: 'Caught', unit: 'robbers', start: 'The robber is getting away! Chase them!', go: 'CHASE!', caught: 'CAUGHT!', escaped: 'Oh no, the robber got away!', next: 'A new robber, even faster!', wrong: (k, n, a) => `Skid! ${k} + ${n} = ${a}`, titleNew: 'New record!', good: 'Super cop!', ok: 'Good job!', msg: (s, c) => `You caught ${s} robber${s === 1 ? '' : 's'} and got ${c} question${c === 1 ? '' : 's'} right.`, best: b => ` Your best: ${b}.` },
     rd: { title: 'Roadblock Rush', tag: 'NEW', desc: 'Steer your car into the lane with the right answer. Unlock the gate and vroom through!', score: 'Gates', start: 'Ready… set… GO!', go: 'GO!', wrong: (k, n, a) => `Crash! ${k} + ${n} = ${a}`, titleNew: 'New record!', good: 'Ace driver!', ok: 'Good job!', unit: 'gates', msg: s => `You opened ${s} roadblock${s === 1 ? '' : 's'}.`, best: b => ` Your best: ${b}.`, noLane: v => `No lane says ${v}. Try again!` },
     modeTitle: 'How to play', pick: 'Plus Highway', mapNote: 'Every level has a roadblock. Get 3 stars to open it, and Plusy rolls on to the next level!', gamesTitle: 'Games', tileK: 'Plus', tableWord: 'Plus',
     seg: { touch: 'Touch', gesture: 'Hands', voice: 'Voice' },
@@ -1375,10 +1429,11 @@ const I18N = {
     chMsg: s => `You answered ${s} correctly in 60 seconds.`, chBest: b => ` Your best: ${b}.`, correctUnit: 'correct',
     again: 'Play again', learnNext: n => `Learn Plus ${n}`, review: n => `Review Plus ${n}`, menu: 'Main menu', notX: v => `(not ${v})`,
     hints: {
-      home: { touch: 'Tap a level on the map to start learning.', gesture: 'Show <b>1–10 fingers</b> and hold to pick a level. <b>11</b> = 1 finger on each hand. <b>12</b> = 1 finger (left) + 2 fingers (right). <b>Make a fist</b> for the Challenge.', voice: 'Say <b>“plus five”</b> to learn, <b>“quiz five”</b> for a quiz, <b>“roadblock”</b>, <b>“challenge”</b> or <b>“balloons”</b>.' },
+      home: { touch: 'Tap a level on the map to start learning.', gesture: 'Show <b>1–10 fingers</b> and hold to pick a level. <b>11</b> = 1 finger on each hand. <b>12</b> = 1 finger (left) + 2 fingers (right). <b>Make a fist</b> for the Challenge.', voice: 'Say <b>“plus five”</b> to learn, <b>“quiz five”</b> for a quiz, <b>“roadblock”</b>, <b>“chase”</b> or <b>“challenge”</b>.' },
       learn: { touch: 'Tap a row and watch the keys drop into the chests, then count them all.', gesture: 'Show fingers to pick a row (4 fingers = row 4). Row <b>11</b> = 1 + 1 fingers, row <b>12</b> = 1 + 2 fingers (two hands). <b>Make a fist</b> to start the quiz.', voice: 'Say a number, like <b>“four”</b>. Say <b>“read”</b> to hear them all, <b>“quiz”</b> to start the quiz.' },
       quiz: { touch: 'Tap the right answer.', gesture: 'Show <b>1, 2, 3 or 4 fingers</b> and hold to choose.', voice: 'Say the answer as soon as the question appears, like <b>“thirteen”</b>. Say <b>“repeat”</b> to hear the question.' },
       result: { touch: 'Choose what to do next.', gesture: 'Show the number of fingers on the button.', voice: 'Say <b>“play again”</b>, <b>“next”</b> or <b>“menu”</b>.' },
+      chase: { touch: 'Tap the right answer as fast as you can. The faster you answer, the faster the police car goes!', gesture: 'Show <b>1, 2, 3 or 4 fingers</b> and hold to choose.', voice: 'Say the answer out loud, like <b>“fifteen”</b>.' },
       road: { touch: 'Tap the lane with the right answer and your car zooms there! (On a computer: ← → keys, and ↑ to boost.)', gesture: 'Show <b>1, 2 or 3 fingers</b> to pick a lane, and hold.', voice: 'Say the answer out loud, like <b>“fifteen”</b>. The car changes lanes.' },
       balloon: { touch: 'Tap the balloon with the right answer before it floats away!', gesture: 'Show <b>1–4 fingers</b> to match the number on a balloon, and hold.', voice: 'Say the answer out loud, like <b>“fifteen”</b>.' }
     },
@@ -1570,6 +1625,7 @@ function sfx(k) {
     else if (k === 'win') [523, 659, 784, 1047].forEach((f, i) => tone(f, i * .12, .32));
     else if (k === 'coin') { tone(1320, 0, .07, 'sine', .1); tone(1760, .06, .14, 'sine', .1); }
     else if (k === 'combo') [523, 659, 784, 1047, 1319, 1568].forEach((f, i) => tone(f, i * .065, .24, 'triangle', .16));
+    else if (k === 'siren') { [0, .3].forEach(t => { glide(700, 1050, .14, .07, t); glide(1050, 700, .14, .07, t + .15); }); }
     else if (k === 'vroom') { tone(110, 0, .45, 'sawtooth', .07); glide(160, 520, .4, .1); }
     else if (k === 'crash') { noise(.5, 500, .8); tone(90, 0, .3, 'square', .08); }
     else if (k === 'unlock') { tone(1500, 0, .05, 'square', .05); tone(900, .07, .08, 'square', .05); }
@@ -1660,12 +1716,12 @@ function cfStep() {
 const burstFrom = (el, n, spread) => { const r = el.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, n, spread); };
 
 /* ================= screens ================= */
-const screens = { home: $('#scrHome'), learn: $('#scrLearn'), quiz: $('#scrQuiz'), balloon: $('#scrBalloon'), road: $('#scrRoad'), result: $('#scrResult') };
+const screens = { home: $('#scrHome'), learn: $('#scrLearn'), quiz: $('#scrQuiz'), chase: $('#scrChase'), road: $('#scrRoad'), result: $('#scrResult') };
 function show(name) {
   for (const [k, el] of Object.entries(screens)) el.hidden = k !== name;
   if (name !== 'learn' && S.reciting) stopRecite();
-  if (name !== 'quiz' && name !== 'balloon' && name !== 'road' && Q) { stopTimer(); clearTimeout(Q.timer); }
-  if (name !== 'balloon') blStop();
+  if (name !== 'quiz' && name !== 'chase' && name !== 'road' && Q) { stopTimer(); clearTimeout(Q.timer); }
+  if (name !== 'chase') csStop();
   if (name !== 'road') rdStop();
   S.screen = name; body.dataset.screen = name;
   clearHold();
@@ -1689,8 +1745,8 @@ function applyLang() {
   syncSound();
   renderHome(); renderHints();
   if (S.screen === 'learn') { relabelLearn(); selectRow(S.row, false); }
-  if (Q && Q.kind !== 'balloon') renderQuizTitle();
-  if (Q && Q.kind === 'balloon') renderLives();
+  if (Q && (Q.kind === 'sifir' || Q.kind === 'review' || Q.kind === 'ch')) renderQuizTitle();
+  if (Q && Q.kind === 'chase') csLives();
   if (Q && Q.kind === 'road') rdLives();
   if (S.screen === 'result' && S.lastResult) renderResult();
   $('#reciteLbl').textContent = S.reciting ? T.stop : T.read;
@@ -1707,7 +1763,7 @@ function setLang(l) { if (l === S.lang) return; hush(); S.lang = l; store.lang =
 function renderHome() {
   const T = L(), p = P();
   renderMap();
-  $('#blBest').textContent = p.balloonBest || 0;
+  $('#csBest').textContent = p.chaseBest || 0;
   $('#rdBest').textContent = p.roadBest || 0;
   const total = Object.values(p.stars).reduce((a, b) => a + b, 0);
   const mastered = Object.values(p.stars).filter(v => v >= 3).length;
@@ -1926,7 +1982,7 @@ function finish() {
   if (!Q) return;
   stopTimer(); clearTimeout(Q.timer);
   const p = P(), kind = Q.kind, sc = Q.score;
-  const R = { kind, ch: kind === 'ch', sc, n: Q.n, wrong: Q.wrong.slice(), stars: 0, best: false, carrots: Q.earned };
+  const R = { kind, ch: kind === 'ch', sc, correct: Q.correct, n: Q.n, wrong: Q.wrong.slice(), stars: 0, best: false, carrots: Q.earned };
   let bonus = 0;
   if (kind === 'sifir') {
     R.stars = sc >= 12 ? 3 : sc >= 10 ? 2 : sc >= 6 ? 1 : 0;
@@ -1936,9 +1992,9 @@ function finish() {
   } else if (kind === 'ch') {
     R.best = sc > (p.best || 0) && sc > 0;
     if (R.best) { p.best = sc; bonus = 5; }
-  } else if (kind === 'balloon') {
-    R.best = sc > (p.balloonBest || 0) && sc > 0;
-    if (R.best) { p.balloonBest = sc; bonus = 5; }
+  } else if (kind === 'chase') {
+    R.best = sc > (p.chaseBest || 0) && sc > 0;
+    if (R.best) { p.chaseBest = sc; bonus = 5; }
   } else if (kind === 'road') {
     R.best = sc > (p.roadBest || 0) && sc > 0;
     if (R.best) { p.roadBest = sc; bonus = 5; }
@@ -1951,10 +2007,10 @@ function finish() {
   S.lastResult = R;
   const { title, msg } = renderResult();
   show('result');
-  const happy = R.ch ? true : R.kind === 'balloon' || R.kind === 'road' ? sc > 0 : R.stars >= 1;
+  const happy = R.ch ? true : R.kind === 'chase' || R.kind === 'road' ? sc > 0 : R.stars >= 1;
   setMood($('#rMascot'), happy ? 'happy' : 'sad');
   sfx('win');
-  if (R.ch || R.kind === 'balloon' || R.kind === 'road' ? sc > 0 : R.stars >= 1) setTimeout(() => burst(innerWidth / 2, innerHeight * .3, R.stars === 3 || R.best ? 130 : 70, 1.3), 150);
+  if (R.ch || R.kind === 'chase' || R.kind === 'road' ? sc > 0 : R.stars >= 1) setTimeout(() => burst(innerWidth / 2, innerHeight * .3, R.stars === 3 || R.best ? 130 : 70, 1.3), 150);
   say(`${title} ${msg}`);
 }
 function renderResult() {
@@ -1969,9 +2025,9 @@ function renderResult() {
   } else if (R.kind === 'road') {
     title = R.best ? T.rd.titleNew : R.sc >= 10 ? T.rd.good : T.rd.ok;
     msg = T.rd.msg(R.sc) + (R.best ? '' : T.rd.best(P().roadBest || 0));
-  } else if (R.kind === 'balloon') {
-    title = R.best ? T.bl.titleNew : R.sc >= 10 ? T.bl.good : T.bl.ok;
-    msg = T.bl.msg(R.sc) + (R.best ? '' : T.bl.best(P().balloonBest || 0));
+  } else if (R.kind === 'chase') {
+    title = R.best ? T.cs.titleNew : R.sc >= 3 ? T.cs.good : T.cs.ok;
+    msg = T.cs.msg(R.sc, R.correct || 0) + (R.best ? '' : T.cs.best(P().chaseBest || 0));
   } else {
     title = R.best ? T.chNew : R.sc >= 10 ? T.chGood : T.chOk;
     msg = T.chMsg(R.sc) + (R.best ? '' : T.chBest(P().best || 0));
@@ -1979,7 +2035,7 @@ function renderResult() {
   $('#rTitle').textContent = title;
   $('#rMsg').textContent = msg;
   const rs = $('#rStars'); rs.hidden = R.kind !== 'sifir'; rs.innerHTML = starsHTML(R.stars);
-  $('#rScore').innerHTML = R.ch ? `${R.sc}<small> ${T.correctUnit}</small>` : R.kind === 'road' ? `${R.sc}<small> ${T.rd.unit}</small>` : R.kind === 'balloon' ? `${R.sc}<small> ${T.bl.unit}</small>` : `${R.sc}<small>/12</small>`;
+  $('#rScore').innerHTML = R.ch ? `${R.sc}<small> ${T.correctUnit}</small>` : R.kind === 'road' ? `${R.sc}<small> ${T.rd.unit}</small>` : R.kind === 'chase' ? `${R.sc}<small> ${T.cs.unit}</small>` : `${R.sc}<small>/12</small>`;
   const re = $('#rEarned'); re.hidden = !R.carrots; re.innerHTML = CARROT + esc(T.carrotsEarned(R.carrots));
   const rv = $('#rReview');
   rv.innerHTML = R.wrong.slice(0, 8).map(w => `<li>${w.k} + ${w.n} = ${w.ans}${w.got != null ? ` <span>${T.notX(w.got)}</span>` : ''}</li>`).join('');
@@ -1987,7 +2043,7 @@ function renderResult() {
   const nx = R.n % 12 + 1, weak = weakFacts().length;
   const acts = R.kind === 'ch' ? [['again', T.again, startChallenge], ['menu', T.menu, goHome]]
     : R.kind === 'review' ? [['again', T.again, startReview], ['menu', T.menu, goHome]]
-    : R.kind === 'balloon' ? [['again', T.again, startBalloon], ['menu', T.menu, goHome]]
+    : R.kind === 'chase' ? [['again', T.again, startChase], ['menu', T.menu, goHome]]
     : R.kind === 'road' ? [['again', T.again, startRoad], ['menu', T.menu, goHome]]
     : [['again', T.again, () => startQuiz(R.n)],
        R.stars >= 2 ? ['next', T.learnNext(nx), () => openLearn(nx)] : ['next', T.review(R.n), () => openLearn(R.n)],
@@ -2216,7 +2272,8 @@ function heard(text, interim) {
   heardEl.textContent = text ? `“${text}”` : ''; heardEl.classList.toggle('interim', !!interim);
   /* show what Plusy hears right under the question, so the child knows it is listening */
   if (S.screen === 'quiz' && Q && !Q.answered) { const fb = $('#fb'); fb.className = 'fb heard'; fb.textContent = text ? `“${text}”` : ''; }
-  if (S.screen === 'balloon' && Q && Q.kind === 'balloon' && !Q.answered && text) blSay(`“${text}”`, 'heard');
+  if (S.screen === 'chase' && Q && Q.kind === 'chase' && !Q.answered && text) csSay(`“${text}”`, 'heard');
+  if (S.screen === 'road' && Q && Q.kind === 'road' && !Q.answered && text) rdSay(`“${text}”`, 'heard');
 }
 /* Words for a number in both languages, used to tell whether an answer heard so far could still grow
    into a longer one ("dua" → "dua puluh empat", "twenty" → "twenty-four"). */
@@ -2225,12 +2282,12 @@ function canGrow(v, valid) {
   const mine = spoken(v);
   return valid.some(u => u !== v && spoken(u).some(w => mine.some(m => m.length < w.length && m.every((x, i) => w[i] === x))));
 }
-/* Numbers that count as an answer right now: the four choices in a quiz, or the balloons still in the sky. */
+/* Numbers that count as an answer right now: the choices on screen in a quiz or a game. */
 function liveAnswers() {
   if (anySheet() || !Q || Q.answered) return null;
   if (S.screen === 'quiz' && Q.opts) return Q.opts.slice();
   if (S.screen === 'road' && Q.kind === 'road' && Q.opts) return Q.opts.slice();
-  if (S.screen === 'balloon' && Q.kind === 'balloon') return BL.balloons.filter(b => !b.popped && !b.gone).map(b => b.v);
+  if (S.screen === 'chase' && Q.kind === 'chase' && Q.opts) return Q.opts.slice();
   return null;
 }
 /* Act on a partial result as soon as it is clearly a complete answer; otherwise act once it has stopped
@@ -2321,7 +2378,7 @@ const KW = {
   again: ['lagi', 'ulang', 'semula', 'main', 'again', 'play', 'retry', 'replay'],
   review: ['ulang kaji', 'ulangkaji', 'latihan', 'review', 'practice', 'practise'],
   closet: ['almari', 'closet', 'wardrobe', 'kedai', 'shop'],
-  balloon: ['belon', 'balloon', 'balloons', 'pop'],
+  chase: ['kejar', 'polis', 'pencuri', 'belon', 'chase', 'police', 'robber', 'thief', 'balloon', 'balloons'],
   road: ['sekatan', 'jalan', 'kereta', 'lumba', 'pandu', 'road', 'roadblock', 'car', 'race', 'drive', 'rush']
 };
 /* Returns true when the words led to an action. */
@@ -2333,14 +2390,14 @@ function voiceAct(alts, how) {
   const nums = alts.map(parseNumber).filter(v => v != null);
   const click = sel => { const b = screens[S.screen].querySelector(sel); if (b) { b.click(); return true; } return false; };
   if (anySheet()) return false;
-  if (quick && S.screen !== 'quiz' && S.screen !== 'balloon' && S.screen !== 'road') return false;
+  if (quick && S.screen !== 'quiz' && S.screen !== 'chase' && S.screen !== 'road') return false;
   switch (S.screen) {
     case 'home':
       if (has('review')) return startReview();
       if (has('closet')) return openCloset();
       if (has('road')) return startRoad();
       if (has('challenge')) return startChallenge();
-      if (has('balloon')) return startBalloon();
+      if (has('chase')) return startChase();
       if (nums.length && nums[0] >= 1 && nums[0] <= 12) { sfx('tap'); return has('quiz') ? startQuiz(nums[0]) : openLearn(nums[0]); }
       break;
     case 'learn':
@@ -2369,15 +2426,13 @@ function voiceAct(alts, how) {
         rdSay(L().rd.noLane(nums[0]), 'no');
       }
       return;
-    case 'balloon':
+    case 'chase':
       if (has('stop')) return goHome();
-      if (nums.length && Q && Q.kind === 'balloon' && !Q.answered) {
-        if (quick && !nums.some(x => BL.balloons.some(b => !b.popped && !b.gone && b.v === x))) return false;
-        const live = BL.balloons.filter(b => !b.popped && !b.gone);
-        const v = live.some(b => b.v === Q.ans) && nums.includes(Q.ans) ? Q.ans : nums.find(x => live.some(b => b.v === x));
-        if (v != null) return blPop(live.find(b => b.v === v));
+      if (nums.length && Q && Q.kind === 'chase' && !Q.answered && Q.opts) {
+        const v = nums.includes(Q.ans) ? Q.ans : nums.find(x => Q.opts.includes(x));
+        if (v != null) return csAnswer(v, $$('#csOpts .opt').find(b => +b.dataset.v === v));
         if (partial) return false;
-        const msg = $('#blMsg'); msg.className = 'bl-msg no'; msg.innerHTML = `<span>${esc(L().bl.noBalloon(nums[0]))}</span>`;
+        csSay(L().noNum, 'no');
       }
       return;
     case 'result':
@@ -2583,12 +2638,9 @@ const wait = ms => new Promise(r => setTimeout(r, ms));
 const FLAME = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.6 2c.7 3.3-1.2 5-2.7 6.7C8.3 10.5 7 12.3 7 15a5 5 0 0 0 10 0c0-2.4-1.1-3.8-2-5.1.1 1.6-.4 2.8-1.6 3.4.5-3.7-1.1-7.8-.8-11.3z" fill="#FFE27A"/><path d="M12 12.4c-1.6 1.4-2.6 2.5-2.6 4.1a2.6 2.6 0 0 0 5.2 0c0-1.5-.9-2.5-1.6-3.4-.2.9-.6 1.4-1.2 1.6.4-.8.4-1.5.2-2.3z" fill="#FFFFFF"/></svg>';
 const HEART = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.7l-1.4-1.3C5.4 14.7 2 11.6 2 7.8 2 4.7 4.4 2.3 7.5 2.3c1.7 0 3.4.8 4.5 2.1 1.1-1.3 2.8-2.1 4.5-2.1 3.1 0 5.5 2.4 5.5 5.5 0 3.8-3.4 6.9-8.6 11.6z"/></svg>';
 const FLAG = '<svg viewBox="0 0 24 28" aria-hidden="true"><path d="M5 3v23" stroke="#7A5530" stroke-width="2.6" stroke-linecap="round"/><path d="M6.2 3.6h13.6l-3.6 4.6 3.6 4.6H6.2z" fill="#FFD23F" stroke="#C99200" stroke-width="1.3" stroke-linejoin="round"/><path d="M9.6 8.2l1.2 1.2 2.4-2.6" fill="none" stroke="#7A4A00" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-const BALLOON = '<svg viewBox="0 0 100 170" aria-hidden="true"><path class="str" d="M50 114c-7 12 7 21 0 33s6 15 1 23" fill="none" stroke-width="2.4" stroke-linecap="round"/><path d="M50 4C24 4 6 26 6 54c0 30 22 52 40 56l-5 8h18l-5-8c18-4 40-26 40-56C94 26 76 4 50 4z" style="fill:var(--b)"/><path d="M50 4C24 4 6 26 6 54c0 30 22 52 40 56l-5 8h18l-5-8c18-4 40-26 40-56C94 26 76 4 50 4z" fill="none" stroke="rgba(0,0,0,.12)" stroke-width="2"/><ellipse cx="31" cy="33" rx="8" ry="15" fill="#fff" opacity=".38" transform="rotate(24 31 33)"/></svg>';
-const BALLOON_IC = '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 29c1 5 3 9 5 16M35 27c-1 6-3 11-6 18M24 25c0 7 0 13-1 20" stroke="#8A93A6" stroke-width="1.6" fill="none" stroke-linecap="round"/><ellipse cx="13" cy="18" rx="9" ry="11" fill="#F03E5A"/><ellipse cx="35" cy="16" rx="9" ry="11" fill="#3B82F6"/><ellipse cx="24" cy="13" rx="9.5" ry="11.5" fill="#FFB800"/><ellipse cx="20.5" cy="8.5" rx="2.4" ry="3.6" fill="#fff" opacity=".55"/></svg>';
 document.documentElement.style.setProperty('--carrot', `url("data:image/svg+xml,${encodeURIComponent(CARROT.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" '))}")`);
 document.documentElement.style.setProperty('--key2', `url("data:image/svg+xml,${encodeURIComponent(KEY_BLUE.replace('<svg ', '<svg xmlns="http://www.w3.org/2000/svg" '))}")`);
 $$('.flame').forEach(e => { e.innerHTML = FLAME; });
-$('#blIcon').innerHTML = BALLOON_IC;
 const sayable = w => w.charAt(0) + w.slice(1).toLowerCase();
 
 /* A golden key flies from where the answer was to the key counter, which bounces when it lands. */
@@ -2862,123 +2914,133 @@ function countUp(el, total, lands, per) {
   requestAnimationFrame(step);
 }
 
-/* ================= Balloon Pop ================= */
-const BL = { raf: 0, last: 0, balloons: [], on: false };
-const blField = $('#blField');
-function blCrossSecs() {
-  const base = S.mode === 'gesture' ? 12 : S.mode === 'voice' ? 11 : 7.5, min = S.mode === 'touch' ? 3.6 : 6.5;
-  return Math.max(min, base * Math.pow(.94, Q ? Q.score : 0));
-}
-function renderLives() {
-  const n = Q && Q.kind === 'balloon' ? Q.lives : 3, el = $('#blLives');
+/* ================= Police Chase: fast right answers close the gap; Plusy drops in as the roadblock ================= */
+const POLICE_SVG = '<svg viewBox="0 0 120 60" aria-hidden="true"><path d="M6 40Q6 30 16 28L34 26L46 12Q50 9 56 9H82Q88 9 92 14L102 26Q114 28 116 36V44Q116 47 112 47H10Q6 47 6 44Z" fill="#FFFFFF" stroke="#1B2233" stroke-width="2.5"/><path d="M8 35.5H115" stroke="#2563EB" stroke-width="7"/><text x="62" y="38" font-size="6.2" font-family="Arial,sans-serif" font-weight="700" fill="#FFFFFF" text-anchor="middle">POLIS</text><path d="M50 14H66V26H40Z" fill="#8FD3FF" stroke="#1B2233" stroke-width="2"/><path d="M70 14H86L96 26H70Z" fill="#8FD3FF" stroke="#1B2233" stroke-width="2"/><rect class="sl r" x="55" y="2.5" width="11" height="6.5" rx="2" fill="#FF3B3B"/><rect class="sl b" x="67" y="2.5" width="11" height="6.5" rx="2" fill="#3B82F6"/><rect x="110" y="29" width="6" height="4" rx="1" fill="#FFF3B0"/><circle cx="30" cy="47" r="9.5" fill="#15171C"/><circle cx="30" cy="47" r="4" fill="#9AA3B2"/><circle cx="94" cy="47" r="9.5" fill="#15171C"/><circle cx="94" cy="47" r="4" fill="#9AA3B2"/></svg>', THIEF_SVG = '<svg viewBox="0 0 120 60" aria-hidden="true"><path d="M5 42Q5 32 15 30L36 27L50 15Q54 12 60 12H80Q86 12 90 16L100 27Q115 29 117 38V44Q117 47 113 47H9Q5 47 5 44Z" fill="#4B2E83" stroke="#1B1033" stroke-width="2.5"/><path d="M7 37H116" stroke="#FFC300" stroke-width="3"/><path d="M54 17H67V27H44Z" fill="#1B2233"/><path d="M71 17H85L94 27H71Z" fill="#1B2233"/><g transform="translate(62 0)"><path d="M2 12Q1 4 9 3Q17 4 16 12Q16 15 9 15Q2 15 2 12Z" fill="#E0B43A" stroke="#7A5A00" stroke-width="1.4"/><path d="M6 3.5L9 1L12 3.5" fill="none" stroke="#7A5A00" stroke-width="1.4"/><text x="9" y="12" font-size="5.6" font-family="Arial,sans-serif" font-weight="700" fill="#5A3E00" text-anchor="middle">RM</text></g><rect x="111" y="31" width="6" height="4" rx="1" fill="#FFF3B0"/><circle cx="30" cy="47" r="9.5" fill="#15171C"/><circle cx="30" cy="47" r="4" fill="#9AA3B2"/><circle cx="95" cy="47" r="9.5" fill="#15171C"/><circle cx="95" cy="47" r="4" fill="#9AA3B2"/></svg>';
+$('#csPolice').innerHTML = POLICE_SVG; $('#csThief').innerHTML = THIEF_SVG; $('#csIcon').innerHTML = POLICE_SVG;
+const CS = { on: false, raf: 0, last: 0, gap: 55, drift: 3, o1: 0, o2: 0, phase: 'idle', t0: 0, thiefX: 0, flee: 0 };
+function csLives() {
+  const n = Q && Q.kind === 'chase' ? Q.lives : 3, el = $('#csLives');
   el.innerHTML = [0, 1, 2].map(i => HEART.replace('<svg', `<svg class="${i < n ? 'on' : 'lost'}"`)).join('');
   el.setAttribute('aria-label', `${L().bl.lives}: ${n}`);
 }
-function blStop() { BL.on = false; cancelAnimationFrame(BL.raf); BL.balloons = []; if (blField) blField.innerHTML = ''; }
-function blSetStreak() {
-  $('#blStreak').hidden = Q.streak < 2; $('#blStreakN').textContent = Q.streak; $('#blStreak').classList.toggle('fire', Q.streak >= 3);
+function csSay(text, cls) { const m = $('#csMsg'); m.className = 'bl-msg rd-msg cs-msg' + (cls ? ' ' + cls : ''); m.innerHTML = text ? `<span>${esc(text)}</span>` : ''; }
+function csStreak() { $('#csStreak').hidden = Q.streak < 2; $('#csStreakN').textContent = Q.streak; $('#csStreak').classList.toggle('fire', Q.streak >= 3); }
+function csGo(text) { const g = $('#csGo'); g.innerHTML = `<span>${esc(text)}</span>`; clearTimeout(g._t); g._t = setTimeout(() => { g.innerHTML = ''; }, 900); }
+function csStop() { CS.on = false; cancelAnimationFrame(CS.raf); CS.phase = 'idle'; }
+function csNewThief(first) {
+  CS.gap = 55; CS.flee = 0; CS.phase = 'chase';
+  CS.drift = 2.6 + Q.score * .9;
+  const th = $('#csThief'); th.classList.remove('caught', 'flee');
+  const pl = $('#csPlusy'); pl.classList.remove('drop');
+  csGo(L().cs.go); sfx('siren');
+  if (!first) csSay(L().cs.next);
 }
-function blSay(text, cls) { const m = $('#blMsg'); m.className = 'bl-msg' + (cls ? ' ' + cls : ''); m.innerHTML = text ? `<span>${esc(text)}</span>` : ''; }
-function startBalloon() {
+function startChase() {
   if (Q) { stopTimer(); clearTimeout(Q.timer); }
-  blStop();
-  Q = newQ('balloon', { lives: 3 });
-  $('#blScore').textContent = 0; $('#blCarrotsN').textContent = 0;
-  blSetStreak(); renderLives();
-  $('#blA').textContent = '?'; $('#blB').textContent = '?'; $('#blSlot').textContent = '?'; $('#blSlot').className = 'slot';
-  show('balloon');
-  blSay(L().bl.start);
-  BL.on = true; BL.last = 0; BL.raf = requestAnimationFrame(blTick);
-  say(L().bl.start);
-  Q.timer = setTimeout(blRound, 900);
+  csStop();
+  Q = newQ('chase', { lives: 3, sc: 0, correct: 0 });
+  show('chase');
+  $('#csScore').textContent = 0; $('#csCarrotsN').textContent = 0;
+  csLives(); csStreak(); csSay(L().cs.start); say(L().cs.start);
+  csNewThief(true);
+  CS.on = true; CS.last = 0; CS.raf = requestAnimationFrame(csTick);
+  Q.timer = setTimeout(csNext, 700);
 }
-function blRound() {
-  if (!Q || Q.kind !== 'balloon' || !BL.on) return;
+function csNext() {
+  if (!Q || Q.kind !== 'chase' || !CS.on || CS.phase !== 'chase') return;
+  const lvl = Q.correct, weak = weakFacts().filter(([a, b]) => Q.last !== a + 'x' + b);
   let k, n;
-  const weak = weakFacts().filter(([a, b]) => b >= 2 && Q.last !== a + 'x' + b);
-  if (weak.length && Math.random() < .35) [k, n] = weak[Math.floor(Math.random() * Math.min(weak.length, 6))];
-  else do { n = 2 + Math.floor(Math.random() * 11); k = 1 + Math.floor(Math.random() * 12); } while (Q.last === k + 'x' + n);
-  Q.last = k + 'x' + n; setSifirColor(n);
-  Object.assign(Q, { k, n2: n, ans: k + n, answered: false }); Q.i++;
-  $('#blA').textContent = k; $('#blB').textContent = n;
-  $('#blSlot').textContent = '?'; $('#blSlot').className = 'slot';
-  blSay(''); $('#blMascot').dataset.mood = '';
-  BL.balloons.forEach(b => b.el.remove()); BL.balloons = [];
-  const W = blField.clientWidth, H = blField.clientHeight, bw = W < 480 ? 74 : 92, bh = bw * 1.7, secs = blCrossSecs();
-  makeOptions(k, n).forEach((v, i) => {
-    const el = document.createElement('button');
-    el.className = 'balloon' + (i === 2 ? ' lt' : ''); el.dataset.finger = i + 1; el.dataset.v = v;
-    el.style.setProperty('--b', `var(--o${i + 1})`); el.style.setProperty('--bw', bw + 'px');
-    el.setAttribute('aria-label', `${i + 1}: ${v}`);
-    el.innerHTML = `${BALLOON}<span class="bv">${v}</span><span class="fbadge">${handSVG(i + 1)}${i + 1}</span>`;
-    const b = { el, v, lane: i, bw, bh, y: H + 8 + Math.random() * H * .28, vy: (H + bh) / (secs * (.88 + Math.random() * .24)), ph: Math.random() * 6.28, popped: false, gone: false, flee: false };
-    el.addEventListener('click', () => blPop(b));
-    blField.append(el); BL.balloons.push(b);
-    blPlace(b, W, performance.now());
+  if (lvl >= 4 && weak.length && Math.random() < .3) [k, n] = weak[Math.floor(Math.random() * Math.min(weak.length, 6))];
+  else { const maxN = lvl < 5 ? 5 : lvl < 12 ? 9 : 12, maxK = lvl < 5 ? 9 : 12; do { n = 1 + Math.floor(Math.random() * maxN); k = 1 + Math.floor(Math.random() * maxK); } while (Q.last === k + 'x' + n); }
+  Q.last = k + 'x' + n; Q.i++;
+  Object.assign(Q, { k, n2: n, ans: k + n, answered: false, opts: makeOptions(k, n) });
+  CS.t0 = performance.now();
+  $('#csA').textContent = k; $('#csB').textContent = n; $('#csSlot').textContent = '?'; $('#csSlot').className = 'slot';
+  const box = $('#csOpts'); box.innerHTML = '';
+  Q.opts.forEach((v, i) => {
+    const b = document.createElement('button');
+    b.className = 'opt'; b.dataset.finger = i + 1; b.dataset.v = v;
+    b.setAttribute('aria-label', `${i + 1}: ${v}`);
+    b.innerHTML = `<span class="fbadge">${handSVG(i + 1)}${i + 1}</span>${v}`;
+    b.addEventListener('click', () => csAnswer(v, b));
+    box.append(b);
   });
 }
-function blPlace(b, W, t) {
-  const x = W * (b.lane + .5) / 4 - b.bw / 2 + Math.sin(t / 650 + b.ph) * 9;
-  b.el.style.transform = `translate(${x.toFixed(1)}px,${b.y.toFixed(1)}px) rotate(${(Math.sin(t / 900 + b.ph) * 4).toFixed(2)}deg)`;
-}
-function blTick(t) {
-  if (!BL.on) return;
-  BL.raf = requestAnimationFrame(blTick);
-  const dt = BL.last ? Math.min(.05, (t - BL.last) / 1000) : 0; BL.last = t;
-  const W = blField.clientWidth;
-  for (const b of BL.balloons) {
-    if (b.gone || (b.popped && !b.flee)) continue;
-    b.y -= b.vy * dt * (b.flee ? 3.4 : 1);
-    blPlace(b, W, t);
-    if (b.y + b.bh * .55 < 0) {
-      b.gone = true; b.el.remove();
-      if (!b.flee && Q && Q.kind === 'balloon' && b.v === Q.ans && !Q.answered) blMiss();
-    }
-  }
-}
-function blPop(b) {
-  if (!b || !Q || Q.kind !== 'balloon' || Q.answered || b.popped || b.gone) return;
-  clearHold();
-  const T = L(), ok = b.v === Q.ans, m = $('#blMascot');
-  b.popped = true; b.el.disabled = true; b.el.classList.add('pop');
-  sfx('pop');
-  const r = b.el.getBoundingClientRect();
-  Q.answered = true; noteFact(Q.k, Q.n2, ok);
-  $('#blSlot').textContent = Q.ans; $('#blSlot').classList.add('ok');
-  BL.balloons.forEach(o => { if (o === b) return; o.el.disabled = true; if (ok) o.flee = true; else if (o.v === Q.ans) { o.popped = true; o.el.classList.add('reveal'); } });
+function csAnswer(v, btn) {
+  if (!Q || Q.kind !== 'chase' || Q.answered || CS.phase !== 'chase') return;
+  Q.answered = true; clearHold();
+  const T = L(), ok = v === Q.ans, pol = $('#csPolice');
+  $$('#csOpts .opt').forEach(b => { b.disabled = true; if (+b.dataset.v === Q.ans) b.classList.add('is-right'); else if (b !== btn) b.classList.add('dim'); });
+  $('#csSlot').textContent = Q.ans; $('#csSlot').classList.add('ok');
+  noteFact(Q.k, Q.n2, ok);
   if (ok) {
-    burst(r.left + r.width / 2, r.top + r.width * .55, 36, .9);
-    Q.score++; Q.streak++; Q.earned++; P().carrots++;
+    const secs = (performance.now() - CS.t0) / 1000, fast = secs < 2.5;
+    CS.gap -= 15 + (fast ? 9 : secs < 4 ? 4 : 0);
+    Q.correct++; Q.streak++; Q.earned++; P().carrots++;
     const earned = Q.earned;
-    $('#blScore').textContent = Q.score;
-    flyCarrot(b.el, $('#blCarrots'), () => { $('#blCarrotsN').textContent = earned; });
+    flyCarrot(btn || $('#csSlot'), $('#csCarrots'), () => { $('#csCarrotsN').textContent = earned; });
+    pol.classList.add('boost'); setTimeout(() => pol.classList.remove('boost'), 700);
+    sfx('vroom');
     const combo = comboFx(Q.streak);
-    blSay(combo ? '' : T.praise[Math.floor(Math.random() * T.praise.length)], 'ok');
-    setMood(m, 'happy'); setTimeout(() => sfx('ok'), 90);
-    Q.timer = setTimeout(blRound, 950);
+    csSay(combo ? '' : T.praise[Math.floor(Math.random() * T.praise.length)], 'ok');
   } else {
-    Q.streak = 0; Q.lives--;
-    Q.wrong.push({ k: Q.k, n: Q.n2, ans: Q.ans, got: b.v });
-    blSay(T.bl.wrong(Q.k, Q.n2, Q.ans), 'no');
-    setMood(m, 'sad'); setTimeout(() => sfx('no'), 90);
-    renderLives(); bumpLives();
-    Q.timer = setTimeout(Q.lives > 0 ? blRound : finish, 1800);
+    if (btn) btn.classList.add('is-wrong');
+    CS.gap += 12; Q.streak = 0;
+    Q.wrong.push({ k: Q.k, n: Q.n2, ans: Q.ans, got: v });
+    pol.classList.remove('spin'); void pol.offsetWidth; pol.classList.add('spin');
+    sfx('no'); csSay(T.cs.wrong(Q.k, Q.n2, Q.ans), 'no');
   }
-  save(); blSetStreak();
+  save(); csStreak();
+  Q.timer = setTimeout(csNext, ok ? 550 : 1300);
 }
-function bumpLives() { const el = $('#blLives'); el.classList.remove('hit'); void el.offsetWidth; el.classList.add('hit'); }
-function blMiss() {
-  const T = L();
-  Q.answered = true; Q.streak = 0; Q.lives--;
-  noteFact(Q.k, Q.n2, false); Q.wrong.push({ k: Q.k, n: Q.n2, ans: Q.ans, got: null });
-  $('#blSlot').textContent = Q.ans; $('#blSlot').classList.add('ok');
-  blSay(T.bl.miss(Q.k, Q.n2, Q.ans), 'no');
-  setMood($('#blMascot'), 'sad'); sfx('no'); renderLives(); bumpLives(); save();
-  BL.balloons.forEach(o => { o.el.disabled = true; o.flee = true; });
-  blSetStreak();
-  Q.timer = setTimeout(Q.lives > 0 ? blRound : finish, 1600);
+function csCaught() {
+  CS.phase = 'caught'; Q.answered = true; clearTimeout(Q.timer);
+  $$('#csOpts .opt').forEach(b => { b.disabled = true; });
+  const T = L(), pl = $('#csPlusy');
+  pl.style.left = (CS.thiefX + $('#csThief').offsetWidth * 1.02) + 'px';
+  pl.classList.remove('drop'); void pl.offsetWidth; pl.classList.add('drop');
+  setTimeout(() => {
+    if (!Q || Q.kind !== 'chase') return;
+    $('#csThief').classList.add('caught'); sfx('crash'); shakeApp(false);
+    Q.score++; P().carrots += 2; Q.earned += 2; $('#csCarrotsN').textContent = Q.earned; $('#csScore').textContent = Q.score;
+    burstFrom(pl, 70, 1.1); csGo(T.cs.caught); csSay(''); sfx('win'); say(T.cs.caught);
+    setMood($('#csMascot'), 'happy'); save();
+  }, 520);
+  Q.timer = setTimeout(() => { if (Q && Q.kind === 'chase') { csNewThief(false); csNext(); } }, 2600);
 }
-
+function csEscaped() {
+  CS.phase = 'escaped'; Q.answered = true; clearTimeout(Q.timer);
+  $$('#csOpts .opt').forEach(b => { b.disabled = true; });
+  Q.lives--; csLives();
+  const el = $('#csLives'); el.classList.remove('hit'); void el.offsetWidth; el.classList.add('hit');
+  csSay(L().cs.escaped, 'no'); sfx('no'); say(L().cs.escaped);
+  Q.timer = setTimeout(() => { if (!Q || Q.kind !== 'chase') return; if (Q.lives > 0) { csNewThief(false); csNext(); } else finish(); }, 2200);
+}
+function csTick(t) {
+  if (!CS.on) return;
+  CS.raf = requestAnimationFrame(csTick);
+  const dt = CS.last ? Math.min(.05, (t - CS.last) / 1000) : 0; CS.last = t;
+  const sc = $('#csScene'), W = sc.clientWidth, pol = $('#csPolice'), th = $('#csThief'), cw = pol.offsetWidth;
+  const moving = CS.phase === 'chase' || CS.phase === 'escaped';
+  const speed = CS.phase === 'caught' ? 60 : 420;
+  CS.o2 -= speed * dt; CS.o1 -= speed * .25 * dt;
+  sc.style.setProperty('--o2', (CS.o2 % 920).toFixed(1) + 'px'); sc.style.setProperty('--o1', (CS.o1 % 2310).toFixed(1) + 'px');
+  if (CS.phase === 'chase' && Q && !Q.answered) CS.gap += CS.drift * dt;
+  if (CS.phase === 'chase') CS.gap = Math.max(0, CS.gap);
+  /* thief sits ahead on the right; the gap pulls the police car back towards the left edge */
+  CS.thiefX = W * .58 - cw * .1;
+  const span = CS.thiefX - 6, polX = CS.thiefX - cw * .92 - Math.min(100, CS.gap) / 100 * (span - cw * .92);
+  if (CS.phase === 'escaped') CS.flee += 600 * dt;
+  th.style.transform = `translateX(${(CS.thiefX + CS.flee).toFixed(1)}px)`;
+  pol.style.transform = `translateX(${polX.toFixed(1)}px)`;
+  const g = Math.max(0, Math.min(100, CS.gap));
+  $('#csFill').style.left = (100 - g) / 2 + '%'; $('#csFill').style.right = '0';
+  $('#csMPol').style.left = (100 - g) * .9 + '%'; $('#csMThf').style.left = '95%';
+  $('#csFill').style.left = ((100 - g) * .9) + '%'; $('#csFill').style.right = '5%';
+  const d = $('#csDist'); d.textContent = Math.round(g) + ' m'; d.classList.toggle('near', g < 20);
+  if (CS.phase === 'chase' && CS.gap <= 4) csCaught();
+  else if (CS.phase === 'chase' && CS.gap >= 100) csEscaped();
+}
 
 /* ================= Roadblock Rush: steer into the lane whose gate shows the right sum ================= */
 const CAR_SVG = '<svg viewBox="0 0 60 100" aria-hidden="true"><rect x="1" y="16" width="11" height="20" rx="4" fill="#15171C"/><rect x="48" y="16" width="11" height="20" rx="4" fill="#15171C"/><rect x="1" y="66" width="11" height="22" rx="4" fill="#15171C"/><rect x="48" y="66" width="11" height="22" rx="4" fill="#15171C"/><path d="M15 9Q30 1 45 9L50 40Q52 62 50 89Q30 99 10 89Q8 62 10 40Z" fill="#FF6A00" stroke="#A84300" stroke-width="2.5"/><path d="M26 3h8v94h-8z" fill="#FFFFFF" opacity=".9"/><path d="M17 31Q30 25 43 31L41 45Q30 42 19 45Z" fill="#8FD3FF" stroke="#1B2233" stroke-width="2"/><path d="M19 71Q30 74 41 71L42 80Q30 83 18 80Z" fill="#8FD3FF" stroke="#1B2233" stroke-width="2"/><circle cx="30" cy="58" r="8.5" fill="#FFFFFF" stroke="#1B2233" stroke-width="1.5"/><path d="M30 53v10M25 58h10" stroke="#E8590C" stroke-width="3.2" stroke-linecap="round"/><rect x="14" y="7" width="8" height="4" rx="2" fill="#FFF3B0"/><rect x="38" y="7" width="8" height="4" rx="2" fill="#FFF3B0"/><rect x="13" y="89" width="9" height="3.5" rx="1.7" fill="#FF3B3B"/><rect x="38" y="89" width="9" height="3.5" rx="1.7" fill="#FF3B3B"/></svg>';
@@ -3117,8 +3179,8 @@ $('#quizBack').addEventListener('click', goHome);
 $('#btnRecite').addEventListener('click', toggleRecite);
 $('#btnStartQuiz').addEventListener('click', () => { sfx('tap'); startQuiz(S.sifir); });
 $('#btnChallenge').addEventListener('click', () => { sfx('tap'); startChallenge(); });
-$('#btnBalloon').addEventListener('click', () => { sfx('tap'); startBalloon(); });
-$('#blBack').addEventListener('click', goHome);
+$('#btnChase').addEventListener('click', () => { sfx('tap'); startChase(); });
+$('#csBack').addEventListener('click', goHome);
 const darkMQ = matchMedia('(prefers-color-scheme: dark)');
 const curTheme = () => store.theme || document.documentElement.dataset.theme || (darkMQ.matches ? 'dark' : 'light');
 function applyTheme() {
@@ -3145,7 +3207,7 @@ setMode(['touch', 'gesture', 'voice'].includes(store.mode) ? store.mode : 'touch
 show('home');
 if (store.profiles.length > 1) openWho();
 
-window.__pintar = { canGrow, V, parseNumber, countFingers, handsValue, rankVoice, ms, en, makeOptions, onVoice, setLang, openHelp, P, store, weakFacts, reviewSet, startReview, openWho, openCloset, renderHome, renderDress, startBalloon, blPop, BL, MAP, mapGoal, layoutMap, comboFx, save, state: () => ({ S, Q }), dbg: () => ({ frames: G.frames, hist: G.hist.slice(), lock: G.lock }) };
+window.__pintar = { canGrow, V, parseNumber, countFingers, handsValue, rankVoice, ms, en, makeOptions, onVoice, setLang, openHelp, P, store, weakFacts, reviewSet, startReview, openWho, openCloset, renderHome, renderDress, startChase, startRoad, MAP, mapGoal, layoutMap, comboFx, save, state: () => ({ S, Q }), dbg: () => ({ frames: G.frames, hist: G.hist.slice(), lock: G.lock }) };
 })();
 </script>
 </body>

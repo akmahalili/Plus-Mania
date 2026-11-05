@@ -11,7 +11,8 @@ Dibina berdasarkan [Timesy](https://akmahalili.github.io/timesy/) (sifir darab),
 - **Lebuhraya Tambah** — peta jalan 12 tahap (Tambah 1 hingga Tambah 12), setiap satu ada sekatan jalan. Dapat 3 bintang dalam kuiz untuk membukanya.
 - **Belajar** — kunci emas dan kunci biru jatuh ke dalam dua peti, kemudian dikira bersama (contoh: *Mula dari 7, kira 5 lagi: 8, 9, 10, 11, 12*).
 - **Kuiz** — 12 soalan setiap pintu. Pilihan jawapan yang salah dibina daripada kesilapan biasa murid (terlebih/terkurang 1–2, beza 10, atau tolak bukannya tambah).
-- **Cabaran 60 saat** dan **Pop Belon** — soalan tambah campur.
+- **Kejar Pencuri (Police Chase)** — jawab pantas untuk kejar kereta pencuri; jawapan cepat = turbo, salah = tergelincir. Bila dekat, Plusy jatuh dari atas sebagai sekatan jalan dan pencuri ditangkap! Setiap pencuri baharu lebih laju; 3 nyawa.
+- **Cabaran 60 saat** — soalan tambah campur.
 - **Ulang Kaji Pintar** — Plusy ingat soalan yang sukar.
 - **Kunci emas** — ganjaran untuk setiap jawapan betul; tebus di **Almari Plusy** (kon trafik, topi keselamatan, cermin mata hitam, latar bendera lumba dan bandar malam).
 - Pelbagai pemain dalam satu peranti, mod gelap, boleh dipasang (PWA) dan dibuka tanpa internet selepas kali pertama.
